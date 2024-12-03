@@ -50,24 +50,17 @@
       const files = event.dataTransfer.files;
       if (files.length > 0) {
         const file = files[0];
-        //uploadImage(file);  // 上傳圖片
-        downloadImage(file);  // 呼叫下載圖片的函式
+        uploadImage(file);  // 上傳圖片
       }
     });
 
-    // 下載圖片的函式
-    function downloadImage(file) {
-        const link = document.createElement('a');  // 創建下載連結
-        link.href = URL.createObjectURL(file);  // 使用 Object URL 生成圖片的 URL
-        link.download = file.name;  // 設定下載檔案的名稱
-        link.click();  // 觸發點擊事件，開始下載
-    }
 
-/*
     // 上傳圖片的函式
     function uploadImage(file) {
       //const url = 'https://your-upload-url.com';  // 替換為你的上傳 URL
       //https://drive.google.com/drive/folders/1MwhtfVGeoo5YZeYx90QYLNTybC0djLpC?usp=sharing
+
+      //http://drive.google.com/uc?export=view&id=1MwhtfVGeoo5YZeYx90QYLNTybC0djLpC
       const url = 'https://drive.google.com/uc?export=download&id=1MwhtfVGeoo5YZeYx90QYLNTybC0djLpC';
       const formData = new FormData();
       formData.append('file', file);  // 將圖片檔案加入 FormData
@@ -87,7 +80,7 @@
         alert('圖片上傳失敗！');
       });
     }
-*/
+
 
   </script>
 
