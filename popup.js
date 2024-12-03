@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const autoSaveStatus = document.getElementById('autoSaveStatus');
 
     // 載入設定
-    chrome.storage.local.get(['apiKey', 'recentFiles', 'autoSavePath', 'autoSaveEnabled'], function(result) {
+    localStorage.getItem(['apiKey', 'recentFiles', 'autoSavePath', 'autoSaveEnabled'], function(result) {
         if (result.apiKey) {
             apiKeyInput.value = result.apiKey;
         }
@@ -83,10 +83,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // 自動儲存功能開關
     autoSaveToggleBtn.addEventListener('click', function() {
-        chrome.storage.local.get('autoSaveEnabled', function(result) {
+        localStorage.getItem('autoSaveEnabled', function(result) {
             const newState = !result.autoSaveEnabled;
             enableAutoSave(newState);
-            chrome.storage.local.set({ autoSaveEnabled: newState });
+            localStorage.setItem({ autoSaveEnabled: newState });
         });
     });
 
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const autoSavePath = autoSavePathInput.value.trim();
         
         if (apiKey && autoSavePath) {
-            chrome.storage.local.set({ 
+            localStorage.setItem({ 
                 apiKey: apiKey,
                 autoSavePath: autoSavePath 
             }, function() {
@@ -135,12 +135,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         };
 
         // 儲存到歷史記錄
-        chrome.storage.local.get(['recentFiles', 'autoSaveEnabled', 'autoSavePath'], async function(result) {
+        localStorage.getItem(['recentFiles', 'autoSaveEnabled', 'autoSavePath'], async function(result) {
             const recentFiles = result.recentFiles || [];
             const updatedFiles = [newRecord, ...recentFiles].slice(0, 10);
             
             // 更新儲存
-            await chrome.storage.local.set({ recentFiles: updatedFiles });
+            await localStorage.setItem({ recentFiles: updatedFiles });
             updateRecentFiles(updatedFiles);
 
             // 如果啟用自動儲存，則自動匯出
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 修改儲存檔案的函數
     async function saveToFile(content, photoData) {
         try {
-            const result = await chrome.storage.local.get('autoSavePath');
+            const result = await localStorage.getItem('autoSavePath');
             const savePath = result.autoSavePath;
             
             if (!savePath) {
@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             return;
         }
 
-        const apiKey = await chrome.storage.local.get('apiKey');
+        const apiKey = await localStorage.getItem('apiKey');
         if (!apiKey.apiKey) {
             updateStatus('請先設定 API Key', 'inactive');
             return;
@@ -513,7 +513,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // 修改匯出歷史紀錄功能
     exportHistoryBtn.addEventListener('click', function() {
-        chrome.storage.local.get('recentFiles', function(result) {
+        localStorage.getItem('recentFiles', function(result) {
             const recentFiles = result.recentFiles || [];
             
             // 建立 HTML 內容
