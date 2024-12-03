@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Upload</title>
+  <style>
+    /* 設定拖放區域的樣式 */
+    #drop-area {
+      width: 80%;
+      height: 300px;
+      border: 2px dashed #007bff;
+      margin: 50px auto;
+      text-align: center;
+      padding: 20px;
+      font-size: 16px;
+      line-height: 300px;
+      color: #007bff;
+    }
+    #drop-area.hover {
+      background-color: #f0f8ff;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="drop-area">
+    拖曳圖片到此處上傳
+  </div>
+
+  <script>
+    // 拖放區域的 DOM 元素
+    const dropArea = document.getElementById('drop-area');
+
+    // 監聽拖曳進來的檔案
+    dropArea.addEventListener('dragover', (event) => {
+      event.preventDefault();  // 防止預設行為
+      dropArea.classList.add('hover');
+    });
+
+    dropArea.addEventListener('dragleave', () => {
+      dropArea.classList.remove('hover');
+    });
+
+    dropArea.addEventListener('drop', (event) => {
+      event.preventDefault();
+      dropArea.classList.remove('hover');
+      
+      // 取得拖曳的檔案
+      const files = event.dataTransfer.files;
+      if (files.length > 0) {
+        const file = files[0];
+        uploadImage(file);  // 上傳圖片
+      }
+    });
+
+    // 上傳圖片的函式
+    function uploadImage(file) {
+      //const url = 'https://your-upload-url.com';  // 替換為你的上傳 URL
+      //https://drive.google.com/drive/folders/1MwhtfVGeoo5YZeYx90QYLNTybC0djLpC?usp=sharing
+      const url = 'https://drive.google.com/uc?export=download&id=1MwhtfVGeoo5YZeYx90QYLNTybC0djLpC';
+      const formData = new FormData();
+      formData.append('file', file);  // 將圖片檔案加入 FormData
+
+      // 發送 POST 請求上傳圖片
+      fetch(url, {
+        method: 'POST',
+        body: formData,
+      })
+      .then(response => response.json())  // 假設伺服器回傳 JSON
+      .then(data => {
+        console.log('成功:', data);
+        alert('圖片上傳成功！');
+      })
+      .catch(error => {
+        console.error('錯誤:', error);
+        alert('圖片上傳失敗！');
+      });
+    }
+  </script>
+
+</body>
+</html>
