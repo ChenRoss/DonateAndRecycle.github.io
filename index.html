@@ -1,88 +1,284 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Upload</title>
+  <title>相機照片分析器</title>
+  <script src="lib/markdown-it.min.js"></script>
   <style>
-    /* 設定拖放區域的樣式 */
-    #drop-area {
-      width: 80%;
-      height: 300px;
-      border: 2px dashed #007bff;
-      margin: 50px auto;
-      text-align: center;
-      padding: 20px;
+    body {
+      width: 600px;
+      padding: 15px;
+      font-family: "Microsoft JhengHei", sans-serif;
+      background-image: url("back.png");
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-position-x: right;      
+    }
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    #h2_text {
+      font-size: 24px;
+    }
+    #h3_text {
+      font-size: 24px;
+    }    
+
+    .status {
+      margin: 10px 0;
+      padding: 1px;
+      border-radius: 4px;
       font-size: 16px;
-      line-height: 300px;
-      color: #007bff;
     }
-    #drop-area.hover {
-      background-color: #f0f8ff;
+
+    .active {
+      background-color: #e8f5e9;
+      color: #2e7d32;
     }
+
+    .inactive {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, .3) 0 5px 15px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #1565c0;
+    }
+
+    #analyzePhoto:not(:disabled) {
+      background-color: #ffd000;
+      color: black;
+      font-weight: bold;
+    }
+
+    #preview, #camera {
+      width: 100%;
+      height: 300px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      display: none;
+      object-fit: contain;
+    }
+
+    .controls {
+      display: flex;
+      /*flex-direction: column;*/
+      gap: 10px;
+    }   
+
+    #analysisResult {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      border: 1px solid #dee2e6;
+      font-size: 14px;
+      display: none;
+    }
+
+    #analysisResult ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin: 8px 0;
+    }
+
+    #analysisResult li {
+      margin: 4px 0;
+    }
+
+    #fileList {
+      margin-top: 10px;
+      max-height: 550px;
+      overflow-y: auto;
+    }
+
+    .file-item {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      cursor: pointer;
+    }
+
+    .file-item:hover {
+      background-color: #f5f5f5;
+    }
+
+    .file-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .file-item .info {
+      flex: 1;
+    }
+
+    .file-item .timestamp {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .file-item .analysis {
+      margin-top: 5px;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+
+    .settings {
+      margin-top: 15px;
+      padding: 15px 20px;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+
+    .settings label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .settings input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .path-hint {
+      display: block;
+      color: #666;
+      font-size: 12px;
+      margin-top: 6px;
+      margin-bottom: 12px;
+    }
+
+    .history-controls {
+      margin: 10px 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .history-controls button {
+      flex: 1;
+      padding: 8px;
+      background-color: #4CAF50;
+    }
+
+    .history-controls button:hover {
+      background-color: #45a049;
+    }
+
+    .auto-save-controls {
+      margin: 15px 0;
+    }
+
+    #autoSaveStatus {
+      background-color: transparent;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .camera-select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: white;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .camera-select:focus {
+      border-color: #1976d2;
+      outline: none;
+    }
+
+    .non_thing {
+      height: 30px;
+    }    
   </style>
 </head>
 <body>
+  <div class="container">
+    <h2 id=h2_text>相機照片分析器</h2>
+    <div id="status" class="status">準備就緒</div>
+    
+    <video id="camera" autoplay playsinline></video>
+    <img id="preview" alt="預覽">
+    
+    <div class="non_thing">
+      <div id="nonthing"></div>
+    </div>
 
-  <div id="drop-area">
-    拖曳圖片到此處上傳
+    <div class="controls">
+      <button id="startCamera">開啟相機</button>
+      <button id="stopCamera" disabled>關閉相機</button>
+      <button id="capturePhoto" disabled>拍攝照片</button>
+      <button id="analyzePhoto" disabled>分析照片</button>
+    </div>
+
+    <div id="analysisResult"></div>
+
+    <div class="settings">
+      <label for="apiKey">OpenAI API Key:</label>
+      <input type="password" id="apiKey" placeholder="輸入您的 OpenAI API Key">
+      <label for="autoSavePath">自動紀錄的資料夾名稱:</label>
+      <input type="text" id="autoSavePath" placeholder="會儲存在下載資料夾底下，請設定資料夾名稱">
+      <small class="path-hint">※ 路徑會自動建立在Chrome的「設定」>「下載」>「位置」的資料夾底下</small>
+      <div class="auto-save-controls">
+        <button id="autoSaveToggle">開啟自動記錄</button>
+        <span id="autoSaveStatus" class="status-indicator">未啟用</span>
+      </div>
+      <button id="saveSettings">儲存設定</button>
+    </div>
+
+    <div id="fileList">
+      <h3 id=h3_text>最近分析的照片</h3>
+      <div class="history-controls">
+        <button id="exportHistory">匯出歷史紀錄</button>
+        <button id="clearHistory">清除歷史紀錄</button>
+      </div>
+      <div id="recentFiles"></div>
+    </div>
   </div>
-
   <script>
-    // 拖放區域的 DOM 元素
-    const dropArea = document.getElementById('drop-area');
-
-    // 監聽拖曳進來的檔案
-    dropArea.addEventListener('dragover', (event) => {
-      event.preventDefault();  // 防止預設行為
-      dropArea.classList.add('hover');
+    const md = new window.markdownit({
+      html: false,
+      breaks: true,
+      linkify: true,
+      typographer: true
     });
-
-    dropArea.addEventListener('dragleave', () => {
-      dropArea.classList.remove('hover');
-    });
-
-    dropArea.addEventListener('drop', (event) => {
-      event.preventDefault();
-      dropArea.classList.remove('hover');
-      
-      // 取得拖曳的檔案
-      const files = event.dataTransfer.files;
-      if (files.length > 0) {
-        const file = files[0];
-        uploadImage(file);  // 上傳圖片
-      }
-    });
-
-
-    // 上傳圖片的函式
-    function uploadImage(file) {
-      //const url = 'https://your-upload-url.com';  // 替換為你的上傳 URL
-      //https://drive.google.com/drive/folders/1MwhtfVGeoo5YZeYx90QYLNTybC0djLpC?usp=sharing
-
-      //http://drive.google.com/uc?export=view&id=1MwhtfVGeoo5YZeYx90QYLNTybC0djLpC
-      const url = 'https://drive.google.com/drive/folders/1MwhtfVGeoo5YZeYx90QYLNTybC0djLpC?usp=drive_link';
-      const formData = new FormData();
-      formData.append('file', file);  // 將圖片檔案加入 FormData
-
-      // 發送 POST 請求上傳圖片
-      fetch(url, {
-        method: 'POST',
-        body: formData,
-      })
-      .then(response => response.json())  // 假設伺服器回傳 JSON
-      .then(data => {
-        console.log('成功:', data);
-        alert('圖片上傳成功！');
-      })
-      .catch(error => {
-        console.error('錯誤:', error);
-        alert('圖片上傳失敗！');
-      });
-    }
-
-
   </script>
-
+  <script type="module" src="popup.js"></script>
 </body>
-</html>
+</html> 

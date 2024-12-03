@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "相機照片分析器",
+  "version": "1.0",
+  "description": "使用相機拍攝照片並進行分析",
+  "permissions": [
+    "storage",
+    "notifications",
+    "tabs",
+    "activeTab",
+    "background",
+    "downloads",
+    "fileSystem",
+    "fileSystemProvider"
+  ],
+  "host_permissions": [
+    "https://api.openai.com/*"
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icon.png"
+  },
+  "web_accessible_resources": [{
+    "resources": ["*"],
+    "matches": ["<all_urls>"]
+  }]
+} 
