@@ -50,10 +50,20 @@
       const files = event.dataTransfer.files;
       if (files.length > 0) {
         const file = files[0];
-        uploadImage(file);  // 上傳圖片
+        //uploadImage(file);  // 上傳圖片
+        downloadImage(file);  // 呼叫下載圖片的函式
       }
     });
 
+    // 下載圖片的函式
+    function downloadImage(file) {
+        const link = document.createElement('a');  // 創建下載連結
+        link.href = URL.createObjectURL(file);  // 使用 Object URL 生成圖片的 URL
+        link.download = file.name;  // 設定下載檔案的名稱
+        link.click();  // 觸發點擊事件，開始下載
+    }
+
+/*
     // 上傳圖片的函式
     function uploadImage(file) {
       //const url = 'https://your-upload-url.com';  // 替換為你的上傳 URL
@@ -77,6 +87,8 @@
         alert('圖片上傳失敗！');
       });
     }
+*/
+
   </script>
 
 </body>
