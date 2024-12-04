@@ -291,9 +291,11 @@
         if (apiKey && autoSavePath) {
             localStorage.setItem('apiKey', apiKey);
             localStorage.setItem('autoSavePath', autoSavePath); 
-            updateStatus('設定已儲存', 'active');    
+            alert("文字已儲存！");
+            //updateStatus('設定已儲存', 'active');    
         } else {
-            updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
+            //updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
+            alert("儲存失敗！");
         }
     }
   </script>  
