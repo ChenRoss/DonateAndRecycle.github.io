@@ -85,7 +85,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (storedValue4) {
             enableAutoSave(true);
         }
-        updateStatus('設定已讀取', 'active');
+        //updateStatus('設定已讀取', 'active');
+        updateStatus(storedValue3, 'active');
     };
 
     // 自動儲存功能開關
