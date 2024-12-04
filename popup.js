@@ -534,12 +534,13 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </style>
             </head>
             <body>
-                ${recentFiles.map(record => `
-                    <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
-                    <div class="analysis">【分析結果】\n${record.analysis}</div>
-                    <img class="photo" src="${record.image}" alt="分析照片">
-                    <hr>
-                `).join('')}
+                <p>${recentFiles}</p>
+                //${recentFiles.map(record => `
+                //    <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
+                //    <div class="analysis">【分析結果】\n${record.analysis}</div>
+                //    <img class="photo" src="${record.image}" alt="分析照片">
+                //    <hr>
+                //`).join('')}
             </body>
             </html>
         `;
