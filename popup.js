@@ -53,7 +53,7 @@ window.onload = function() {
     // 嘗試從 localStorage 中取得之前儲存的數值
     const storedValue1 = localStorage.getItem('apiKey');
     if (storedValue1) {
-        apiKeyInput.value = storedValue1;
+        document.getElementById('apiKey').value = storedValue1;
     }
     const storedValue2 = localStorage.getItem('recentFiles');
     if (storedValue2) {
@@ -61,7 +61,7 @@ window.onload = function() {
     }
     const storedValue3 = localStorage.getItem('autoSavePath');
     if (storedValue3) {
-        autoSavePathInput.value = storedValue3;
+        document.getElementById('autoSavePath').value = storedValue3;
     }
     const storedValue4 = localStorage.getItem('autoSaveEnabled');
     if (storedValue4) {
