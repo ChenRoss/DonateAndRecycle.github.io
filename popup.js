@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const updatedFiles = [newRecord, ...recentFiles].slice(0, 10);
 
         // 更新儲存
-        localStorage.setItem('recentFiles', updatedFiles);
+        await localStorage.setItem('recentFiles', updatedFiles);
         updateRecentFiles(updatedFiles);
 
         // 如果啟用自動儲存，則自動匯出
@@ -241,11 +241,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 將選單插入到相機按鈕前面
     //startCameraBtn.parentNode.insertBefore(cameraSelect, startCameraBtn);
     noelement.parentNode.insertBefore(cameraSelect, noelement);
-    
-    if(!updtaecameralist) {
-        await getCameraDevices();
-        updtaecameralist = 'complete_update_camera_list';
-    }
 
     // 取得可用的攝影機列表
     async function getCameraDevices() {
@@ -274,6 +269,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             updateStatus('無法取得攝影機列表', 'inactive');
         }
     }
+
+    if(!updtaecameralist) {
+        await getCameraDevices();
+        updtaecameralist = 'complete_update_camera_list';
+    }    
 
     // 修改開啟相機的函數
     startCameraBtn.addEventListener('click', async function() {
