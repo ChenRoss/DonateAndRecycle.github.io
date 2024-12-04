@@ -83,10 +83,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         const autoSavePath = autoSavePathInput.value.trim();
         
         if (apiKey && autoSavePath) {
-            localStorage.setItem('apiKey', apiKey);
-            localStorage.setItem('autoSavePath', autoSavePath); 
-            //updateStatus('設定已儲存', 'active');
-            updateStatus(autoSavePath, 'active');
+            localStorage.setItem("apiKey", apiKey);
+            localStorage.setItem("autoSavePath", autoSavePath); 
+            updateStatus('設定已儲存', 'active');            
         } else {
             updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
         }
