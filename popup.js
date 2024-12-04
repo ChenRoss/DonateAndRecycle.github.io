@@ -137,12 +137,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         imgElement.src = photoData;
         imgElement.width = 1280; // 顯示圖片大小
 
-
         const descriptionElement = document.createElement('div');
         descriptionElement.className = 'analysis';
         descriptionElement.innerHTML = formatText(analysis);
-        //const descriptionElement = document.createElement('p');
-        //descriptionElement.textContent = analysis;
 
         newHistoryItem.appendChild(descriptionElement);
         newHistoryItem.appendChild(imgElement);
@@ -166,7 +163,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         //const updatedFiles = [newRecord, ...recentFiles].slice(0, 10);
 
         // 更新儲存
-        await localStorage.setItem('recentFiles', storedrecentFiles.innerHTML);
+        await localStorage.setItem('recentFiles', recentFilesDiv.innerHTML);
         //updateRecentFiles(updatedFiles);
 
         // 如果啟用自動儲存，則自動匯出
