@@ -79,12 +79,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // 儲存設定
     saveSettingsBtn.addEventListener('click', function() {
-        const apiKey = apiKeyInput.value.trim();
-        const autoSavePath = autoSavePathInput.value.trim();
+        const apiKey_data = apiKeyInput.value.trim();
+        const autoSavePath_data = autoSavePathInput.value.trim();
         
         if (apiKey && autoSavePath) {
-            localStorage.setItem("apiKey", apiKey);
-            localStorage.setItem("autoSavePath", autoSavePath); 
+            localStorage.setItem("apiKeyStorage", apiKey_data);
+            localStorage.setItem("autoSavePathStorage", autoSavePath_data); 
             updateStatus('設定已儲存', 'active');            
         } else {
             updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');

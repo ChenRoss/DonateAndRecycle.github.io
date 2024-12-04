@@ -275,7 +275,7 @@
     // 在網頁加載時執行的程式
     window.onload = function() {
         // 嘗試從 localStorage 中取得之前儲存的數值
-        var storedValue1 = localStorage.getItem("apiKey");
+        var storedValue1 = localStorage.getItem("apiKeyStorage");
         if (storedValue1) {
             document.getElementById("apiKey").value = storedValue1;
         }
@@ -289,7 +289,7 @@
     };
     window.onload = function() {
         // 嘗試從 localStorage 中取得之前儲存的數值
-        var storedValue3 = localStorage.getItem("autoSavePath");
+        var storedValue3 = localStorage.getItem("autoSavePathStorage");
         if (storedValue3) {
             document.getElementById("autoSavePath").value = storedValue3;
         }
