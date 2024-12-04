@@ -522,7 +522,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         updateStatus('建立下載1', 'active');
         const storedrecentFiles = {};
         if(storedValue){
-            storedrecentFiles 
+            storedrecentFiles = storedValue;
         }
 
 
@@ -543,7 +543,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </style>
             </head>
             <body>
-                <p>${storedrecentFiles}</p>
+                //<p>${storedrecentFiles}</p>
                 //${storedrecentFiles.map(record => `
                 //    <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
                 //    <div class="analysis">【分析結果】\n${record.analysis}</div>
