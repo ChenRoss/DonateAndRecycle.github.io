@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 
         updateStatus('建立下載1', 'active');
-        const storedrecentFiles = storedValue || [];
+        const storedrecentFiles = storedValue || {};
 
         updateStatus('建立下載2', 'active');
         
