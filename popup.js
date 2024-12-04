@@ -518,14 +518,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         const storedValue = localStorage.getItem('recentFiles');
 
-
-        updateStatus('建立下載1', 'active');
-        const storedrecentFiles = {};
-        if(storedValue){
-            storedrecentFiles = storedValue;
-        }
-
-
         updateStatus('建立下載2', 'active');
         
         // 建立 HTML 內容
@@ -535,7 +527,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             <head>
                 <meta charset="UTF-8">
                 <style>
-
+                    body { font-family: "Microsoft JhengHei", sans-serif; padding: 20px; }
+                    .photo { max-width: 800px; margin: 20px 0; }
+                    .timestamp { color: #666; }
+                    .analysis { white-space: pre-wrap; }
+                    hr { border: 1px solid #eee; margin: 30px 0; }
                 </style>
             </head>
             <body>
@@ -543,7 +539,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             </html>
         `;
 /*
-                ${storedrecentFiles.map(record => `
+                ${storedValue.map(record => `
                     <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
                     <div class="analysis">【分析結果】\n${record.analysis}</div>
                     <img class="photo" src="${record.image}" alt="分析照片">
