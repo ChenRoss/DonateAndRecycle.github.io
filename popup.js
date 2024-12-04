@@ -126,10 +126,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     async function handleAnalysisComplete(analysis, photoData) {
         // 更新介面
         const analysisResult = document.getElementById('analysisResult');
-        if(analysis){
-            analysisResult.innerHTML = formatText(analysis);
-            analysisResult.style.display = 'block';            
-        }
+        analysisResult.innerHTML = formatText(analysis);
+        analysisResult.style.display = 'block';
        
         // 建立新記錄
         const newRecord = {
@@ -647,6 +645,8 @@ async function analyzePhotoWithAPI(photoData, apiKey) {
 
 // 添加文字格式化函數
 function formatText(text) {
+    if(!text)
+        return;
     return text
         .replace(/\n/g, '<br>')  // 換行
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // 粗體
