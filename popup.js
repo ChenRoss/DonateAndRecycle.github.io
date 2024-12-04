@@ -127,7 +127,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     async function handleAnalysisComplete(analysis, photoData) {
         // 更新介面
         const analysisResult = document.getElementById('analysisResult');
-        analysisResult.innerHTML = formatText(analysis);
+        //analysisResult.innerHTML = formatText(analysis);
+        analysisResult.innerHTML = analysis;
         analysisResult.style.display = 'block';
 
 
