@@ -47,28 +47,7 @@ ${recyclableCategories.join('、')}
 請用繁體中文回答，並盡可能詳細描述所見到的特徵。
 如果圖片不夠清晰，請說明可以觀察到的部分，並標註無法確定的資訊`
 
-// 載入設定
-// 在網頁加載時執行的程式
-window.onload = function() {
-    // 嘗試從 localStorage 中取得之前儲存的數值
-    const storedValue1 = localStorage.getItem('apiKey');
-    if (storedValue1) {
-        document.getElementById('apiKey').value = storedValue1;
-    }
-    const storedValue2 = localStorage.getItem('recentFiles');
-    if (storedValue2) {
-        updateRecentFiles(storedValue2);
-    }
-    const storedValue3 = localStorage.getItem('autoSavePath');
-    if (storedValue3) {
-        document.getElementById('autoSavePath').value = storedValue3;
-    }
-    const storedValue4 = localStorage.getItem('autoSaveEnabled');
-    if (storedValue4) {
-        enableAutoSave(true);
-    }
-    updateStatus('設定已讀取', 'active');
-};
+
 
 
 document.addEventListener('DOMContentLoaded', async function() {
