@@ -127,26 +127,27 @@ document.addEventListener('DOMContentLoaded', async function() {
     async function handleAnalysisComplete(analysis, photoData) {
         // 更新介面
         const analysisResult = document.getElementById('analysisResult');
-        //analysisResult.innerHTML = formatText(analysis);
-        analysisResult.innerHTML = analysis;
+        analysisResult.innerHTML = formatText(analysis);
         analysisResult.style.display = 'block';
 
-
-        const storedrecentFiles = document.getElementById('recentFiles');
         const newHistoryItem = document.createElement('div');
         newHistoryItem.classList.add('file-item');
         
         const imgElement = new Image();
         imgElement.src = photoData;
         imgElement.width = 1280; // 顯示圖片大小
-        
-        const descriptionElement = document.createElement('p');
-        descriptionElement.textContent = analysis;
+
+
+        const descriptionElement = document.createElement('div');
+        descriptionElement.className = 'analysis';
+        descriptionElement.innerHTML = formatText(analysis);
+        //const descriptionElement = document.createElement('p');
+        //descriptionElement.textContent = analysis;
 
         newHistoryItem.appendChild(descriptionElement);
         newHistoryItem.appendChild(imgElement);
         
-        storedrecentFiles.appendChild(newHistoryItem);
+        recentFilesDiv.appendChild(newHistoryItem);
 
 
        
