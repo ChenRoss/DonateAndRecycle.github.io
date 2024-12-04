@@ -537,23 +537,16 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </style>
             </head>
             <body>
-                <div class="analysis">
-                    <p>【分析結果】\n${storedrecentFiles.analysis}</p>
-                </div>
-                <div>
-                    <img class="photo" src="${storedrecentFiles.image}" alt="分析照片">
-                </div>                           
-            </body>
-            </html>
-        `;
-/*
-                ${storedValue.map(record => `
+                ${recentFiles.map(record => `
                     <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
                     <div class="analysis">【分析結果】\n${record.analysis}</div>
                     <img class="photo" src="${record.image}" alt="分析照片">
                     <hr>
-                `).join('')} 
-*/
+                `).join('')}
+            </body>
+            </html>
+        `;
+
         // 建立下載
         const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
 
