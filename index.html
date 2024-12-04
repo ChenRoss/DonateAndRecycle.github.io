@@ -11,7 +11,7 @@
       background-image: url("back.png");
       background-color: transparent;
       background-repeat: no-repeat;
-      background-position-x: 29rem;      
+      background-position-x: 28.5rem;      
     }
     
     .container {
@@ -250,7 +250,7 @@
 
     <div class="settings">
       <label for="apiKey">OpenAI API Key:</label>
-      <input type="text" id="apiKey" placeholder="輸入您的 OpenAI API Key">
+      <input type="password" id="apiKey" placeholder="輸入您的 OpenAI API Key">
       <label for="autoSavePath">自動紀錄的資料夾名稱:</label>
       <input type="text" id="autoSavePath" placeholder="會儲存在下載資料夾底下，請設定資料夾名稱">
       <small class="path-hint">※ 路徑會自動建立在Chrome的「設定」>「下載」>「位置」的資料夾底下</small>
@@ -259,22 +259,6 @@
         <span id="autoSaveStatus" class="status-indicator">未啟用</span>
       </div>
       <button id="saveSettings" onclick="saveText()">儲存設定</button>
-      <script>
-        function saveText() {
-          var apiKey = document.getElementById("apiKey").value;
-          var autoSavePath = document.getElementById("autoSavePath").value;
-          
-          //if (apiKey && autoSavePath) {
-          localStorage.setItem("apiKey1", apiKey);
-          localStorage.setItem("autoSavePath1", autoSavePath); 
-          alert("文字已儲存！");
-              //updateStatus('設定已儲存', 'active');    
-          //} else {
-              //updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
-              //alert("儲存失敗！");
-          //}
-        }
-      </script>        
     </div>
 
     <div id="fileList">
@@ -287,19 +271,13 @@
     </div>
   </div>
   <script>
-    // 載入設定
-    // 在網頁加載時執行的程式
-    window.onload = function() {
-        // 嘗試從 localStorage 中取得之前儲存的數值
-        var storedValue1 = localStorage.getItem("apiKey1");
-        if (storedValue1) {
-            document.getElementById("apiKey").value = storedValue1;
-        }
-        var storedValue3 = localStorage.getItem("autoSavePath1");
-        if (storedValue3) {
-            document.getElementById("autoSavePath").value = storedValue3;
-        }
-    };
-  </script>  
+    const md = new window.markdownit({
+      html: false,
+      breaks: true,
+      linkify: true,
+      typographer: true
+    });
+  </script> 
+  <script type="module" src="popup.js"></script>
 </body>
 </html> 

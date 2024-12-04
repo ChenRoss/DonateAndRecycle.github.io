@@ -47,9 +47,6 @@ ${recyclableCategories.join('、')}
 請用繁體中文回答，並盡可能詳細描述所見到的特徵。
 如果圖片不夠清晰，請說明可以觀察到的部分，並標註無法確定的資訊`
 
-
-
-
 document.addEventListener('DOMContentLoaded', async function() {
     const statusDiv = document.getElementById('status');
     const cameraVideo = document.getElementById('camera');
@@ -68,17 +65,30 @@ document.addEventListener('DOMContentLoaded', async function() {
     const autoSaveToggleBtn = document.getElementById('autoSaveToggle');
     const autoSaveStatus = document.getElementById('autoSaveStatus');
 
-
-
-    // 自動儲存功能開關
-    autoSaveToggleBtn.addEventListener('click', function() {
-        const newState = !localStorage.getItem('autoSaveEnabled');
-        enableAutoSave(newState);
-        localStorage.setItem('autoSaveEnabled', newState );
-    });
+    // 載入設定
+    // 在網頁加載時執行的程式
+    window.onload = function() {
+        // 嘗試從 localStorage 中取得之前儲存的數值
+        const storedApiKey = localStorage.getItem('apiKey');
+        if (storedApiKey) {
+            apiKeyInput.value = storedApiKey;
+        }
+        const storedAutoSavePath = localStorage.getItem('autoSavePath');
+        if (storedAutoSavePath) {
+            autoSavePathInput.value = storedAutoSavePath;
+        }
+        const storedrecentFiles = localStorage.getItem('recentFiles');
+        if (storedrecentFiles) {
+            updateRecentFiles(storedrecentFiles);
+        }
+        const storedautoSaveEnabled = localStorage.getItem('autoSaveEnabled');
+        if (storedautoSaveEnabled) {
+            enableAutoSave(true);
+        }                 
+    };
 
     // 儲存設定
-    saveSettingsBtn.addEventListener('click', function() {
+    saveSettingsBtn.addEventListener("click", function() {
         const apiKey = apiKeyInput.value.trim();
         const autoSavePath = autoSavePathInput.value.trim();
         
@@ -119,11 +129,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         };
 
         // 儲存到歷史記錄
-        const storedValue2 = localStorage.getItem('recentFiles');
-        const storedValue3 = localStorage.getItem('autoSavePath');
-        const storedValue4 = localStorage.getItem('autoSaveEnabled');
+        const storedrecentFiles     = localStorage.getItem('recentFiles');
+        const storedautoSavePath    = localStorage.getItem('autoSavePath');
+        const storedautoSaveEnabled = localStorage.getItem('autoSaveEnabled');
 
-        const recentFiles = storedValue2 || [];
+        const recentFiles = storedrecentFiles || [];
         const updatedFiles = [newRecord, ...recentFiles].slice(0, 10);
 
         // 更新儲存
@@ -131,7 +141,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         updateRecentFiles(updatedFiles);
 
         // 如果啟用自動儲存，則自動匯出
-        if (storedValue4) {
+        if (storedautoSaveEnabled) {
             await saveToFile(analysis, photoData);
         }
     }
@@ -139,8 +149,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 修改儲存檔案的函數
     async function saveToFile(content, photoData) {
         try {
-            const result = await localStorage.getItem('autoSavePath');
-            const savePath = result.autoSavePath;
+            const result_autoSavePath = await localStorage.getItem('autoSavePath');
+            const savePath = result_autoSavePath;
             
             if (!savePath) {
                 throw new Error('請先設定儲存資料夾名稱');
@@ -232,6 +242,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     //startCameraBtn.parentNode.insertBefore(cameraSelect, startCameraBtn);
     noelement.parentNode.insertBefore(cameraSelect, noelement);
     
+    if(!updtaecameralist) {
+        await getCameraDevices();
+        updtaecameralist = 'complete_update_camera_list';
+    }
+
     // 取得可用的攝影機列表
     async function getCameraDevices() {
         try {
@@ -258,11 +273,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             console.error('無法取得攝影機列表：', error);
             updateStatus('無法取得攝影機列表', 'inactive');
         }
-    }
-
-    if(!updtaecameralist) {
-    	await getCameraDevices();
-    	updtaecameralist = 'complete_update_camera_list';
     }
 
     // 修改開啟相機的函數
