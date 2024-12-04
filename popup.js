@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (storedValue4) {
             enableAutoSave(true);
         }
+        updateStatus('設定已讀取', 'active');
     };
 
     // 自動儲存功能開關
@@ -102,7 +103,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (apiKey && autoSavePath) {
             localStorage.setItem('apiKey', apiKey);
             localStorage.setItem('autoSavePath', autoSavePath); 
-            updateStatus('設定已儲存', 'active');
+            //updateStatus('設定已儲存', 'active');
+            updateStatus(autoSavePath, 'active');
         } else {
             updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
         }
