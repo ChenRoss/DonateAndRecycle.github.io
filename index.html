@@ -261,8 +261,8 @@
       <button id="saveSettings" onclick="saveText()">儲存設定</button>
       <script>
         function saveText() {
-          const apiKey = document.getElementById("apiKey").value().trim();
-          const autoSavePath = document.getElementById("autoSavePath").value.trim();
+          var apiKey = document.getElementById("apiKey").value();
+          var autoSavePath = document.getElementById("autoSavePath").value();
           
           //if (apiKey && autoSavePath) {
           localStorage.setItem("apiKey1", apiKey);
