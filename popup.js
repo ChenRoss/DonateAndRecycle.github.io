@@ -128,25 +128,43 @@ document.addEventListener('DOMContentLoaded', async function() {
         const analysisResult = document.getElementById('analysisResult');
         analysisResult.innerHTML = formatText(analysis);
         analysisResult.style.display = 'block';
+
+
+        const storedrecentFiles = document.getElementById('recentFiles');
+        const newHistoryItem = document.createElement('div');
+        newHistoryItem.classList.add('file-item');
+        
+        const imgElement = new Image();
+        imgElement.src = photoData;
+        imgElement.width = 1280; // 顯示圖片大小
+        
+        const descriptionElement = document.createElement('p');
+        descriptionElement.textContent = analysis;
+
+        newHistoryItem.appendChild(descriptionElement);
+        newHistoryItem.appendChild(imgElement);
+        
+        storedrecentFiles.appendChild(newHistoryItem);
+
+
        
         // 建立新記錄
-        const newRecord = {
-            image: photoData,
-            analysis: analysis,
-            timestamp: new Date().toISOString()
-        };
+        //const newRecord = {
+        //    image: photoData,
+        //    analysis: analysis,
+        //    timestamp: new Date().toISOString()
+        //};
 
         // 儲存到歷史記錄
-        const storedrecentFiles     = localStorage.getItem('recentFiles');
-        const storedautoSavePath    = localStorage.getItem('autoSavePath');
+        //const storedrecentFiles     = localStorage.getItem('recentFiles');
         const storedautoSaveEnabled = localStorage.getItem('autoSaveEnabled');
 
-        const recentFiles = storedrecentFiles || [];
-        const updatedFiles = [newRecord, ...recentFiles].slice(0, 10);
+        //const recentFiles = storedrecentFiles || [];
+        //const updatedFiles = [newRecord, ...recentFiles].slice(0, 10);
 
         // 更新儲存
-        await localStorage.setItem('recentFiles', updatedFiles);
-        updateRecentFiles(updatedFiles);
+        await localStorage.setItem('recentFiles', storedrecentFiles);
+        //updateRecentFiles(updatedFiles);
 
         // 如果啟用自動儲存，則自動匯出
         if (storedautoSaveEnabled) {
@@ -535,16 +553,18 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </style>
             </head>
             <body>
+
+            </body>
+            </html>
+        `;
+/*
                 ${storedrecentFiles.map(record => `
                     <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
                     <div class="analysis">【分析結果】\n${record.analysis}</div>
                     <img class="photo" src="${record.image}" alt="分析照片">
                     <hr>
                 `).join('')}
-            </body>
-            </html>
-        `;
-
+*/
         // 建立下載
         const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
 
