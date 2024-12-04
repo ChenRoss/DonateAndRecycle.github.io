@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         document.getElementById('analysisResult').style.display = 'none';
 
         try {
-            const response = await analyzePhotoWithAPI(photoData, apiKey.apiKey);
+            const response = await analyzePhotoWithAPI(photoData, apiKey);
             await handleAnalysisComplete(response, photoData);
             updateStatus('分析完成', 'active');
         } catch (error) {
