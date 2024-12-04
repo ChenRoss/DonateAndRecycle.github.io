@@ -1,270 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <title>相機照片分析器</title>
-  <style>
-    body {
-      width: 600px;
-      padding: 15px;
-      font-family: "Microsoft JhengHei", sans-serif;
-      background-image: url("back.png");
-      background-color: transparent;
-      background-repeat: no-repeat;
-      background-position-x: 29rem;      
-    }
-    
-    .container {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    
-    #h2_text {
-      font-size: 24px;
-    }
-    #h3_text {
-      font-size: 24px;
-    }    
-
-    .status {
-      margin: 10px 0;
-      padding: 1px;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-
-    .active {
-      background-color: #e8f5e9;
-      color: #2e7d32;
-    }
-
-    .inactive {
-      background-color: #ffebee;
-      color: #c62828;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      background-color: #1976d2;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      box-shadow: rgba(0, 0, 0, .3) 0 5px 15px;
-      cursor: pointer;
-      font-size: 18px;
-    }
-
-    button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-
-    button:hover:not(:disabled) {
-      background-color: #1565c0;
-    }
-
-    #analyzePhoto:not(:disabled) {
-      background-color: #ffd000;
-      color: black;
-      font-weight: bold;
-    }
-
-    #preview, #camera {
-      width: 100%;
-      height: 300px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      display: none;
-      object-fit: contain;
-    }
-
-    .controls {
-      display: flex;
-      /*flex-direction: column;*/
-      gap: 10px;
-    }   
-
-    #analysisResult {
-      margin-top: 15px;
-      padding: 15px;
-      background-color: #f8f9fa;
-      border-radius: 4px;
-      border: 1px solid #dee2e6;
-      font-size: 14px;
-      display: none;
-    }
-
-    #analysisResult ul {
-      list-style-type: disc;
-      padding-left: 20px;
-      margin: 8px 0;
-    }
-
-    #analysisResult li {
-      margin: 4px 0;
-    }
-
-    #fileList {
-      margin-top: 10px;
-      max-height: 550px;
-      overflow-y: auto;
-    }
-
-    .file-item {
-      padding: 8px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      cursor: pointer;
-    }
-
-    .file-item:hover {
-      background-color: #f5f5f5;
-    }
-
-    .file-item img {
-      width: 50px;
-      height: 50px;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-
-    .file-item .info {
-      flex: 1;
-    }
-
-    .file-item .timestamp {
-      font-size: 12px;
-      color: #666;
-    }
-
-    .file-item .analysis {
-      margin-top: 5px;
-      font-size: 14px;
-      white-space: pre-wrap;
-    }
-
-    .settings {
-      margin-top: 15px;
-      padding: 15px 20px;
-      background-color: #f5f5f5;
-      border-radius: 4px;
-      margin-bottom: 15px;
-    }
-
-    .settings label {
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .settings input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    .path-hint {
-      display: block;
-      color: #666;
-      font-size: 12px;
-      margin-top: 6px;
-      margin-bottom: 12px;
-    }
-
-    .history-controls {
-      margin: 10px 0;
-      display: flex;
-      gap: 10px;
-    }
-
-    .history-controls button {
-      flex: 1;
-      padding: 8px;
-      background-color: #4CAF50;
-    }
-
-    .history-controls button:hover {
-      background-color: #45a049;
-    }
-
-    .auto-save-controls {
-      margin: 15px 0;
-    }
-
-    #autoSaveStatus {
-      background-color: transparent;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    .camera-select {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      background-color: white;
-      font-size: 14px;
-      box-sizing: border-box;
-    }
-
-    .camera-select:focus {
-      border-color: #1976d2;
-      outline: none;
-    }
-
-    .non_thing {
-      height: 30px;
-    }
-    textarea {
-        width: 100%;
-        height: 150px;
-        margin-bottom: 10px;
-    }
-        
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字儲存範例</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-  <button onclick="saveText()">儲存文字</button>
-  <textarea id="apiKey" placeholder="請在此輸入文字..."></textarea><br>
-  <textarea id="autoSavePath" placeholder="請在此輸入文字..."></textarea><br>
-  <script>
-    function saveText() {
-      var apiKey55 = document.getElementById("apiKey").value();
-      var autoSavePath55 = document.getElementById("autoSavePath").value();
-      
-      //if (apiKey && autoSavePath) {
-      localStorage.setItem("apiKey1", apiKey55);
-      localStorage.setItem("autoSavePath1", autoSavePath55); 
-      alert("文字已儲存！");
-          //updateStatus('設定已儲存', 'active');    
-      //} else {
-          //updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
-          //alert("儲存失敗！");
-      //}
-    };
-    // 載入設定
-    // 在網頁加載時執行的程式
-    window.onload = function() {
-        // 嘗試從 localStorage 中取得之前儲存的數值
-        var storedValue1 = localStorage.getItem("apiKey1");
-        if (storedValue1) {
-            document.getElementById("apiKey").value = storedValue1;
+    <h1>請輸入文字</h1>
+
+    <!-- 文字輸入框 -->
+    <textarea id="textInput" placeholder="請在此輸入文字..."></textarea><br>
+
+    <!-- 儲存按鈕 -->
+    <button onclick="saveText()">儲存文字</button>
+
+    <script>
+        // 預設讀取並顯示已儲存的文字
+        window.onload = function() {
+            var savedText = localStorage.getItem("userText");
+            if (savedText) {
+                document.getElementById("textInput").value = savedText;
+            }
+        };
+
+        // 儲存文字到本地儲存
+        function saveText() {
+            var text = document.getElementById("textInput").value;
+            localStorage.setItem("userText", text);  // 儲存文字
+            alert("文字已儲存！");
         }
-        var storedValue3 = localStorage.getItem("autoSavePath1");
-        if (storedValue3) {
-            document.getElementById("autoSavePath").value = storedValue3;
-        }
-    }
-  </script>  
+    </script>
 </body>
-</html> 
+</html>
