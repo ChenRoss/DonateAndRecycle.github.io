@@ -303,8 +303,8 @@
     };
     // 儲存設定
     function saveText() {
-        const apiKey_data = apiKeyInput.value.trim();
-        const autoSavePath_data = autoSavePathInput.value.trim();
+        const apiKey_data = document.getElementById("apiKey").value.trim();
+        const autoSavePath_data = document.getElementById("autoSavePath").value.trim();
         
         if (apiKey && autoSavePath) {
             localStorage.setItem("apiKeyStorage", apiKey_data);
