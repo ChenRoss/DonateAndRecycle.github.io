@@ -261,18 +261,18 @@
       <button id="saveSettings" onclick="saveText()">儲存設定</button>
       <script>
         function saveText() {
-            const apiKey = document.getElementById("apiKey").value().trim();
-            const autoSavePath = document.getElementById("autoSavePath").value.trim();
-            
-            if (apiKey && autoSavePath) {
-                localStorage.setItem('apiKey', apiKey);
-                localStorage.setItem('autoSavePath', autoSavePath); 
-                alert("文字已儲存！");
-                //updateStatus('設定已儲存', 'active');    
-            } else {
-                //updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
-                alert("儲存失敗！");
-            }
+          const apiKey = document.getElementById("apiKey").value().trim();
+          const autoSavePath = document.getElementById("autoSavePath").value.trim();
+          
+          //if (apiKey && autoSavePath) {
+          localStorage.setItem('apiKey', apiKey);
+          localStorage.setItem('autoSavePath', autoSavePath); 
+          alert("文字已儲存！");
+              //updateStatus('設定已儲存', 'active');    
+          //} else {
+              //updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
+              //alert("儲存失敗！");
+          //}
         }
       </script>        
     </div>
