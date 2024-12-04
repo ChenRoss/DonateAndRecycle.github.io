@@ -229,65 +229,21 @@
 </head>
 <body>
   <button onclick="saveText()">儲存文字</button>
-  <div class="container">
-    <h2 id=h2_text>相機照片分析器</h2>
-    <div id="status" class="status">準備就緒</div>
-    
-    <video id="camera" autoplay playsinline></video>
-    <img id="preview" alt="預覽">
-    
-    <div class="non_thing">
-      <div id="nonthing"></div>
-    </div>
-
-    <div class="controls">
-      <button id="startCamera">開啟相機</button>
-      <button id="stopCamera" disabled>關閉相機</button>
-      <button id="capturePhoto" disabled>拍攝照片</button>
-      <button id="analyzePhoto" disabled>分析照片</button>
-    </div>
-
-    <div id="analysisResult"></div>
-
-    <div class="settings">
-      <label for="apiKey">OpenAI API Key:</label>
-      <input type="text" id="apiKey" placeholder="輸入您的 OpenAI API Key">
-      <label for="autoSavePath">自動紀錄的資料夾名稱:</label>
-      <input type="text" id="autoSavePath" placeholder="會儲存在下載資料夾底下，請設定資料夾名稱">
-      <small class="path-hint">※ 路徑會自動建立在Chrome的「設定」>「下載」>「位置」的資料夾底下</small>
-      <div class="auto-save-controls">
-        <button id="autoSaveToggle">開啟自動記錄</button>
-        <span id="autoSaveStatus" class="status-indicator">未啟用</span>
-      </div>
-      <button id="saveSettings" onclick="saveText()">儲存設定</button>
-      <script>
-        function saveText() {
-          var apiKey55 = document.getElementById("apiKey").value();
-          var autoSavePath55 = document.getElementById("autoSavePath").value();
-          
-          //if (apiKey && autoSavePath) {
-          localStorage.setItem("apiKey1", apiKey55);
-          localStorage.setItem("autoSavePath1", autoSavePath55); 
-          alert("文字已儲存！");
-              //updateStatus('設定已儲存', 'active');    
-          //} else {
-              //updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
-              //alert("儲存失敗！");
-          //}
-        }
-      </script>        
-    </div>
-
-    <div id="fileList">
-      <h3 id=h3_text>最近分析的照片</h3>
-      <div class="history-controls">
-        <button id="exportHistory">匯出歷史紀錄</button>
-        <button id="clearHistory">清除歷史紀錄</button>
-      </div>
-      <div id="recentFiles"></div>
-    </div>
-  </div>
   <script>
+    function saveText() {
+      var apiKey55 = document.getElementById("apiKey").value();
+      var autoSavePath55 = document.getElementById("autoSavePath").value();
+      
+      //if (apiKey && autoSavePath) {
+      localStorage.setItem("apiKey1", apiKey55);
+      localStorage.setItem("autoSavePath1", autoSavePath55); 
+      alert("文字已儲存！");
+          //updateStatus('設定已儲存', 'active');    
+      //} else {
+          //updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
+          //alert("儲存失敗！");
+      //}
+    };
     // 載入設定
     // 在網頁加載時執行的程式
     window.onload = function() {
@@ -300,7 +256,7 @@
         if (storedValue3) {
             document.getElementById("autoSavePath").value = storedValue3;
         }
-    };
+    }
   </script>  
 </body>
 </html> 
