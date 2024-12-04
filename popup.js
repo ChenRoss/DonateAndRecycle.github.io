@@ -543,17 +543,18 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </style>
             </head>
             <body>
-                //<p>${storedrecentFiles}</p>
-                //${storedrecentFiles.map(record => `
-                //    <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
-                //    <div class="analysis">【分析結果】\n${record.analysis}</div>
-                //    <img class="photo" src="${record.image}" alt="分析照片">
-                //    <hr>
-                //`).join('')}
+                <p>${storedrecentFiles}</p>
             </body>
             </html>
         `;
-
+/*
+                ${storedrecentFiles.map(record => `
+                    <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
+                    <div class="analysis">【分析結果】\n${record.analysis}</div>
+                    <img class="photo" src="${record.image}" alt="分析照片">
+                    <hr>
+                `).join('')}
+*/
         updateStatus('建立下載3', 'active');
 
         // 建立下載
