@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             return;
         }
 
-        const apiKey = localStorage.getItem('apiKey');
+        const apiKey = await localStorage.getItem('apiKey');
         if (!apiKey) {
             updateStatus('請先設定 API Key', 'inactive');
             return;
