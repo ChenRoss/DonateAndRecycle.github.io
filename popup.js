@@ -422,7 +422,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             updateStatus('請先設定 API Key', 'inactive');
             return;
         }
-        //set button
+        
         startCameraBtn.disabled = true;
         stopCameraBtn.disabled = true;
         capturePhotoBtn.disabled = true;
