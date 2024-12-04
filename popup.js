@@ -534,7 +534,12 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </style>
             </head>
             <body>
-                ${storedValue}           
+                <div class="analysis">
+                    <p>【分析結果】\n${storedrecentFiles.analysis}</p>
+                </div>
+                <div>
+                    <img class="photo" src="${storedrecentFiles.image}" alt="分析照片">
+                </div>                           
             </body>
             </html>
         `;
