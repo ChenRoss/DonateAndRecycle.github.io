@@ -522,7 +522,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         updateStatus('建立下載1', 'active');
         const storedrecentFiles = storedValue || [];
 
-        
+        updateStatus('建立下載2', 'active');
         
         // 建立 HTML 內容
         const htmlContent = `
@@ -550,7 +550,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             </html>
         `;
 
-        updateStatus('建立下載', 'active');
+        updateStatus('建立下載3', 'active');
 
         // 建立下載
         const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
