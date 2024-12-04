@@ -265,8 +265,8 @@
           const autoSavePath = document.getElementById("autoSavePath").value.trim();
           
           //if (apiKey && autoSavePath) {
-          localStorage.setItem('apiKey', apiKey);
-          localStorage.setItem('autoSavePath', autoSavePath); 
+          localStorage.setItem("apiKey1", apiKey);
+          localStorage.setItem("autoSavePath1", autoSavePath); 
           alert("文字已儲存！");
               //updateStatus('設定已儲存', 'active');    
           //} else {
@@ -291,11 +291,11 @@
     // 在網頁加載時執行的程式
     window.onload = function() {
         // 嘗試從 localStorage 中取得之前儲存的數值
-        var storedValue1 = localStorage.getItem("apiKey");
+        var storedValue1 = localStorage.getItem("apiKey1");
         if (storedValue1) {
             document.getElementById("apiKey").value = storedValue1;
         }
-        var storedValue3 = localStorage.getItem("autoSavePath");
+        var storedValue3 = localStorage.getItem("autoSavePath1");
         if (storedValue3) {
             document.getElementById("autoSavePath").value = storedValue3;
         }
