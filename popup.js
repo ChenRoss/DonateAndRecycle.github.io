@@ -87,6 +87,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         }                 
     };
 
+    // 自動儲存功能開關
+    autoSaveToggleBtn.addEventListener('click', function() {
+        const storedautoSaveEnabled = localStorage.getItem('autoSaveEnabled');
+        const newState = !storedautoSaveEnabled;
+        enableAutoSave(newState);
+        localStorage.setItem('autoSaveEnabled', newState);
+    });
+
     // 儲存設定
     saveSettingsBtn.addEventListener("click", function() {
         const apiKey = apiKeyInput.value.trim();
