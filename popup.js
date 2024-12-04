@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
         const storedValue2 = localStorage.getItem('recentFiles');
         if (storedValue2) {
-            updateRecentFiles(result.recentFiles);
+            updateRecentFiles(storedValue2);
         }
         const storedValue3 = localStorage.getItem('autoSavePath');
         if (storedValue3) {
@@ -517,7 +517,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         updateStatus('匯出記錄中', 'active');
 
         const storedValue = localStorage.getItem('recentFiles');
-        const recentFiles = storedValue || [];
+        const storedrecentFiles = storedValue || [];
 
         updateStatus('建立下載1', 'active');
         
@@ -536,8 +536,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </style>
             </head>
             <body>
-                //<p>${recentFiles}</p>
-                //${recentFiles.map(record => `
+                <p>${storedrecentFiles}</p>
+                //${storedrecentFiles.map(record => `
                 //    <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
                 //    <div class="analysis">【分析結果】\n${record.analysis}</div>
                 //    <img class="photo" src="${record.image}" alt="分析照片">
