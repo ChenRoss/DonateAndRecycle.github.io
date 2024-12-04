@@ -126,9 +126,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     async function handleAnalysisComplete(analysis, photoData) {
         // 更新介面
         const analysisResult = document.getElementById('analysisResult');
-        analysisResult.innerHTML = formatText(analysis);
-        analysisResult.style.display = 'block';
-        
+        if(analysis){
+            analysisResult.innerHTML = formatText(analysis);
+            analysisResult.style.display = 'block';            
+        }
+       
         // 建立新記錄
         const newRecord = {
             image: photoData,
