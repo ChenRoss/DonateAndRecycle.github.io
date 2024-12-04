@@ -533,7 +533,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                     hr { border: 1px solid #eee; margin: 30px 0; }
                 </style>
             </head>
-            <body>           
+            <body>
+                ${storedValue}           
             </body>
             </html>
         `;
