@@ -518,6 +518,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         const storedValue = localStorage.getItem('recentFiles');
         const recentFiles = storedValue || [];
+
+        updateStatus('建立下載1', 'active');
         
         // 建立 HTML 內容
         const htmlContent = `
@@ -534,7 +536,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </style>
             </head>
             <body>
-                <p>${recentFiles}</p>
+                //<p>${recentFiles}</p>
                 //${recentFiles.map(record => `
                 //    <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
                 //    <div class="analysis">【分析結果】\n${record.analysis}</div>
