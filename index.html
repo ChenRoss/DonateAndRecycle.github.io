@@ -258,7 +258,7 @@
         <button id="autoSaveToggle">開啟自動記錄</button>
         <span id="autoSaveStatus" class="status-indicator">未啟用</span>
       </div>
-      <button id="saveSettings">儲存設定</button>
+      <button id="saveSettings" onclick="saveText()">儲存設定</button>
     </div>
 
     <div id="fileList">
@@ -301,7 +301,19 @@
             enableAutoSave(true);
         }
     };
-
+    // 儲存設定
+    function saveText() {
+        const apiKey_data = apiKeyInput.value.trim();
+        const autoSavePath_data = autoSavePathInput.value.trim();
+        
+        if (apiKey && autoSavePath) {
+            localStorage.setItem("apiKeyStorage", apiKey_data);
+            localStorage.setItem("autoSavePathStorage", autoSavePath_data); 
+            updateStatus('設定已儲存', 'active');            
+        } else {
+            updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
+        }
+    }
   </script>  
   <script>
     const md = new window.markdownit({
