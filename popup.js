@@ -517,9 +517,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         updateStatus('匯出記錄中', 'active');
 
         const storedValue = localStorage.getItem('recentFiles');
-        const storedrecentFiles = storedValue || [];
+
 
         updateStatus('建立下載1', 'active');
+        const storedrecentFiles = storedValue || [];
+
+        
         
         // 建立 HTML 內容
         const htmlContent = `
