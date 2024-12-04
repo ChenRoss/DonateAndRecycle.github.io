@@ -77,7 +77,19 @@ document.addEventListener('DOMContentLoaded', async function() {
         localStorage.setItem('autoSaveEnabled', newState );
     });
 
-
+    // 儲存設定
+    saveSettingsBtn.addEventListener('click', function() {
+        const apiKey = apiKeyInput.value.trim();
+        const autoSavePath = autoSavePathInput.value.trim();
+        
+        if (apiKey && autoSavePath) {
+            localStorage.setItem('apiKey', apiKey);
+            localStorage.setItem('autoSavePath', autoSavePath); 
+            updateStatus('設定已儲存', 'active');    
+        } else {
+            updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
+        }
+    });
 
     // 自動儲存功能
     function enableAutoSave(enabled) {
@@ -618,7 +630,7 @@ async function analyzePhotoWithAPI(photoData, apiKey) {
         console.error('API 請求錯誤：', error);
         throw error;
     }
-};
+}
 
 // 添加文字格式化函數
 function formatText(text) {

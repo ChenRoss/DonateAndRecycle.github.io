@@ -275,54 +275,27 @@
     // 在網頁加載時執行的程式
     window.onload = function() {
         // 嘗試從 localStorage 中取得之前儲存的數值
-        var storedValue1 = localStorage.getItem("apiKeyStorage");
+        var storedValue1 = localStorage.getItem("apiKey");
         if (storedValue1) {
             document.getElementById("apiKey").value = storedValue1;
         }
-    };
-    window.onload = function() {
-        // 嘗試從 localStorage 中取得之前儲存的數值
-        const storedValue2 = localStorage.getItem("recentFiles");
-        if (storedValue2) {
-            updateRecentFiles(storedValue2);
-        }
-    };
-    window.onload = function() {
-        // 嘗試從 localStorage 中取得之前儲存的數值
-        var storedValue3 = localStorage.getItem("autoSavePathStorage");
+        var storedValue3 = localStorage.getItem("autoSavePath");
         if (storedValue3) {
             document.getElementById("autoSavePath").value = storedValue3;
         }
     };
-    window.onload = function() {
-        // 嘗試從 localStorage 中取得之前儲存的數值
-        const storedValue4 = localStorage.getItem("autoSaveEnabled");
-        if (storedValue4) {
-            enableAutoSave(true);
-        }
-    };
-    // 儲存設定
     function saveText() {
-        const apiKey_data = document.getElementById("apiKey").value.trim();
-        const autoSavePath_data = document.getElementById("autoSavePath").value.trim();
+        const apiKey = apiKeyInput.value.trim();
+        const autoSavePath = autoSavePathInput.value.trim();
         
         if (apiKey && autoSavePath) {
-            localStorage.setItem("apiKeyStorage", apiKey_data);
-            localStorage.setItem("autoSavePathStorage", autoSavePath_data); 
-            updateStatus('設定已儲存', 'active');            
+            localStorage.setItem('apiKey', apiKey);
+            localStorage.setItem('autoSavePath', autoSavePath); 
+            updateStatus('設定已儲存', 'active');    
         } else {
             updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
         }
     }
   </script>  
-  <script>
-    const md = new window.markdownit({
-      html: false,
-      breaks: true,
-      linkify: true,
-      typographer: true
-    });
-  </script>
-  <script type="module" src="popup.js"></script>
 </body>
 </html> 
