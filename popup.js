@@ -79,7 +79,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
         const storedrecentFiles = localStorage.getItem('recentFiles');
         if (storedrecentFiles) {
-            updateRecentFiles(storedrecentFiles);
+            //updateRecentFiles(storedrecentFiles);
+            recentFilesDiv.innerHTML = storedrecentFiles;
         }
         const storedautoSaveEnabled = localStorage.getItem('autoSaveEnabled');
         if (storedautoSaveEnabled) {
@@ -163,7 +164,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         //const updatedFiles = [newRecord, ...recentFiles].slice(0, 10);
 
         // 更新儲存
-        await localStorage.setItem('recentFiles', storedrecentFiles);
+        await localStorage.setItem('recentFiles', storedrecentFiles.innerHTML);
         //updateRecentFiles(updatedFiles);
 
         // 如果啟用自動儲存，則自動匯出
