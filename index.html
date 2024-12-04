@@ -259,6 +259,22 @@
         <span id="autoSaveStatus" class="status-indicator">未啟用</span>
       </div>
       <button id="saveSettings" onclick="saveText()">儲存設定</button>
+      <script>
+        function saveText() {
+            const apiKey = apiKeyInput.value.trim();
+            const autoSavePath = autoSavePathInput.value.trim();
+            
+            if (apiKey && autoSavePath) {
+                localStorage.setItem('apiKey', apiKey);
+                localStorage.setItem('autoSavePath', autoSavePath); 
+                alert("文字已儲存！");
+                //updateStatus('設定已儲存', 'active');    
+            } else {
+                //updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
+                alert("儲存失敗！");
+            }
+        }
+      </script>        
     </div>
 
     <div id="fileList">
@@ -284,20 +300,7 @@
             document.getElementById("autoSavePath").value = storedValue3;
         }
     };
-    function saveText() {
-        const apiKey = apiKeyInput.value.trim();
-        const autoSavePath = autoSavePathInput.value.trim();
-        
-        if (apiKey && autoSavePath) {
-            localStorage.setItem('apiKey', apiKey);
-            localStorage.setItem('autoSavePath', autoSavePath); 
-            alert("文字已儲存！");
-            //updateStatus('設定已儲存', 'active');    
-        } else {
-            //updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
-            alert("儲存失敗！");
-        }
-    }
+
   </script>  
 </body>
 </html> 
