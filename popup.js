@@ -202,13 +202,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             const blob = new Blob([htmlContent], { 
                 type: 'text/html;charset=utf-8' 
             });
-
-            // 下載檔案
-            await chrome.downloads.download({
-                url: URL.createObjectURL(blob),
-                filename: fullPath,
-                saveAs: false
-            });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = fullPath;  // 檔案名稱
+            link.click();  // 觸發下載
 
             URL.revokeObjectURL(blob);
             updateStatus('已儲存分析記錄', 'active');
@@ -218,7 +215,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             updateStatus('儲存失敗：' + error.message, 'inactive');
         }
     }
-
+/*
     // 在 background.js 中添加以下程式碼來處理檔案寫入
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if (request.type === 'writeFile') {
@@ -243,7 +240,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             return true; // 保持消息通道開啟
         }
     });
-
+*/
     // 新增攝影機選擇下拉選單
     const cameraSelect = document.createElement('select');
     cameraSelect.id = 'cameraSelect';
@@ -294,7 +291,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             }*/
 
             // 使用 activeTab 權限請求相機
-            await chrome.tabs.query({active: true, currentWindow: true});
+            //await chrome.tabs.query({active: true, currentWindow: true});
             
             // 取得選擇的攝影機 ID
             const selectedDeviceId = cameraSelect.value;
@@ -353,7 +350,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         	disablecapture = null;
 
             // 使用 activeTab 權限請求相機
-            await chrome.tabs.query({active: true, currentWindow: true});
+            //await chrome.tabs.query({active: true, currentWindow: true});
             
             // 取得選擇的攝影機 ID
             const selectedDeviceId = cameraSelect.value;
@@ -563,11 +560,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 清除歷史紀錄
     clearHistoryBtn.addEventListener('click', function() {
         if (confirm('確定要清除所有歷史紀錄嗎？此操作無法復原。')) {
-            chrome.storage.local.remove('recentFiles', function() {
-                updateRecentFiles([]);
-                updateStatus('歷史紀錄已清除', 'active');
-                document.getElementById('analysisResult').style.display = 'none';
-            });
+            localStorage.removeItem('recentFiles');
+            updateRecentFiles([]);
+            updateStatus('歷史紀錄已清除', 'active');
+            document.getElementById('analysisResult').style.display = 'none';
         }
     });
 });
