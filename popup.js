@@ -66,28 +66,32 @@ document.addEventListener('DOMContentLoaded', async function() {
     const autoSaveStatus = document.getElementById('autoSaveStatus');
 
     // 載入設定
-    localStorage.getItem(['apiKey', 'recentFiles', 'autoSavePath', 'autoSaveEnabled'], function(result) {
-        if (result.apiKey) {
-            apiKeyInput.value = result.apiKey;
+    // 在網頁加載時執行的程式
+    window.onload = function() {
+        // 嘗試從 localStorage 中取得之前儲存的數值
+        const storedValue1 = localStorage.getItem('apiKey');
+        if (storedValue1) {
+            apiKeyInput.value = storedValue1;
         }
-        if (result.autoSavePath) {
-            autoSavePathInput.value = result.autoSavePath;
-        }
-        if (result.autoSaveEnabled) {
-            enableAutoSave(true);
-        }
-        if (result.recentFiles) {
+        const storedValue2 = localStorage.getItem('recentFiles');
+        if (storedValue2) {
             updateRecentFiles(result.recentFiles);
         }
-    });
+        const storedValue3 = localStorage.getItem('autoSavePath');
+        if (storedValue3) {
+            autoSavePathInput.value = storedValue3;
+        }
+        const storedValue4 = localStorage.getItem('autoSaveEnabled');
+        if (storedValue4) {
+            enableAutoSave(true);
+        }
+    };
 
     // 自動儲存功能開關
     autoSaveToggleBtn.addEventListener('click', function() {
-        localStorage.getItem('autoSaveEnabled', function(result) {
-            const newState = !result.autoSaveEnabled;
-            enableAutoSave(newState);
-            localStorage.setItem({ autoSaveEnabled: newState });
-        });
+        const newState = !localStorage.getItem('autoSaveEnabled');
+        enableAutoSave(newState);
+        localStorage.setItem('autoSaveEnabled', newState );
     });
 
     // 儲存設定
@@ -96,12 +100,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         const autoSavePath = autoSavePathInput.value.trim();
         
         if (apiKey && autoSavePath) {
-            localStorage.setItem({ 
-                apiKey: apiKey,
-                autoSavePath: autoSavePath 
-            }, function() {
-                updateStatus('設定已儲存', 'active');
-            });
+            localStorage.setItem('apiKey', apiKey);
+            localStorage.setItem('autoSavePath', autoSavePath); 
+            updateStatus('設定已儲存', 'active');
         } else {
             updateStatus('請輸入有效的 API Key 和儲存路徑', 'inactive');
         }
@@ -135,19 +136,21 @@ document.addEventListener('DOMContentLoaded', async function() {
         };
 
         // 儲存到歷史記錄
-        localStorage.getItem(['recentFiles', 'autoSaveEnabled', 'autoSavePath'], async function(result) {
-            const recentFiles = result.recentFiles || [];
-            const updatedFiles = [newRecord, ...recentFiles].slice(0, 10);
-            
-            // 更新儲存
-            await localStorage.setItem({ recentFiles: updatedFiles });
-            updateRecentFiles(updatedFiles);
+        const storedValue2 = localStorage.getItem('recentFiles');
+        const storedValue3 = localStorage.getItem('autoSavePath');
+        const storedValue4 = localStorage.getItem('autoSaveEnabled');
 
-            // 如果啟用自動儲存，則自動匯出
-            if (result.autoSaveEnabled) {
-                await saveToFile(analysis, photoData);
-            }
-        });
+        const recentFiles = storedValue2 || [];
+        const updatedFiles = [newRecord, ...recentFiles].slice(0, 10);
+
+        // 更新儲存
+        localStorage.setItem('recentFiles', updatedFiles);
+        updateRecentFiles(updatedFiles);
+
+        // 如果啟用自動儲存，則自動匯出
+        if (storedValue4) {
+            await saveToFile(analysis, photoData);
+        }
     }
 
     // 修改儲存檔案的函數
@@ -513,48 +516,48 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // 修改匯出歷史紀錄功能
     exportHistoryBtn.addEventListener('click', function() {
-        localStorage.getItem('recentFiles', function(result) {
-            const recentFiles = result.recentFiles || [];
-            
-            // 建立 HTML 內容
-            const htmlContent = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <style>
-                        body { font-family: "Microsoft JhengHei", sans-serif; padding: 20px; }
-                        .photo { max-width: 800px; margin: 20px 0; }
-                        .timestamp { color: #666; }
-                        .analysis { white-space: pre-wrap; }
-                        hr { border: 1px solid #eee; margin: 30px 0; }
-                    </style>
-                </head>
-                <body>
-                    ${recentFiles.map(record => `
-                        <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
-                        <div class="analysis">【分析結果】\n${record.analysis}</div>
-                        <img class="photo" src="${record.image}" alt="分析照片">
-                        <hr>
-                    `).join('')}
-                </body>
-                </html>
-            `;
 
-            // 建立下載
-            const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0];
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `相機照片分析器_匯出記錄_${timestamp}.html`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-            
-            updateStatus('已匯出所有記錄', 'active');
-        });
+        const storedValue = localStorage.getItem('recentFiles');
+        const recentFiles = storedValue || [];
+        
+        // 建立 HTML 內容
+        const htmlContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <style>
+                    body { font-family: "Microsoft JhengHei", sans-serif; padding: 20px; }
+                    .photo { max-width: 800px; margin: 20px 0; }
+                    .timestamp { color: #666; }
+                    .analysis { white-space: pre-wrap; }
+                    hr { border: 1px solid #eee; margin: 30px 0; }
+                </style>
+            </head>
+            <body>
+                ${recentFiles.map(record => `
+                    <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
+                    <div class="analysis">【分析結果】\n${record.analysis}</div>
+                    <img class="photo" src="${record.image}" alt="分析照片">
+                    <hr>
+                `).join('')}
+            </body>
+            </html>
+        `;
+
+        // 建立下載
+        const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0];
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `相機照片分析器_匯出記錄_${timestamp}.html`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        
+        updateStatus('已匯出所有記錄', 'active');
     });
 
     // 清除歷史紀錄
