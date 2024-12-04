@@ -543,7 +543,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </style>
             </head>
             <body>
-                <p>${storedrecentFiles}</p>
             </body>
             </html>
         `;
