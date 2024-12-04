@@ -514,6 +514,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 修改匯出歷史紀錄功能
     exportHistoryBtn.addEventListener('click', function() {
 
+        updateStatus('匯出記錄中', 'active');
+
         const storedValue = localStorage.getItem('recentFiles');
         const recentFiles = storedValue || [];
         
@@ -542,13 +544,17 @@ document.addEventListener('DOMContentLoaded', async function() {
             </html>
         `;
 
+        updateStatus('建立下載', 'active');
+
         // 建立下載
         const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+
         const url = URL.createObjectURL(blob);
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0];
-        const link = document.createElement('a');
+
+        const link = document.createElement('a');        
         link.href = url;
-        link.download = `相機照片分析器_匯出記錄_${timestamp}.html`;
+        link.download = '相機照片分析器_匯出記錄_${timestamp}.html';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
