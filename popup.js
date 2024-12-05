@@ -143,12 +143,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         const timestampElement = document.createElement('div');
         timestampElement.className = 'timestamp';
 
-        let timeString = `【時間】${new Date().toLocaleString()}`;
-        timestampElement.innerHTML = formatText(timeString);
+        let currentTime = new Date().toLocaleString();
+        let timeString = '【時間】' + currentTime;
+        timestampElement.innerHTML = timeString;
 
         const descriptionElement = document.createElement('div');
         descriptionElement.className = 'analysis';
-        descriptionElement.innerHTML = formatText(`【分析結果】\n${analysis}`);
+        descriptionElement.innerHTML = formatText(analysis);
 
         newHistoryItem.appendChild(timestampElement);
         newHistoryItem.appendChild(descriptionElement);
