@@ -139,11 +139,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         const imgElement = new Image();
         imgElement.src = photoData;
         imgElement.width = 800; // 顯示圖片大小
-        //imgElement.classList.add('fileList-image');
+
+        const timestampElement = document.createElement('div');
+        timestampElement.className = 'timestamp';
+        timestampElement.innerHTML = formatText(analysis);
 
         const descriptionElement = document.createElement('div');
         descriptionElement.className = 'analysis';
-        descriptionElement.innerHTML = formatText(analysis);
+        descriptionElement.innerHTML = "【時間】" + ${new Date().toLocaleString()};//formatText(analysis);
 
         newHistoryItem.appendChild(descriptionElement);
         newHistoryItem.appendChild(imgElement);
