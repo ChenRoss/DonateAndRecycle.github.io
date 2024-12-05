@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         newHistoryItem.appendChild(infoElement);
         newHistoryItem.appendChild(imgElement);     
         
-        let dividingline = '<hr>'
+        const dividingline = document.createElement('hr');
         recentFilesDiv.appendChild(newHistoryItem);
         recentFilesDiv.appendChild(dividingline);
 
