@@ -142,7 +142,33 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         const timestampElement = document.createElement('div');
         timestampElement.className = 'timestamp';
-        //timestampElement.innerHTML = '【時間】${new Date().toLocaleString()}';
+
+/*
+        let currentTime = new Date();
+        let hours = currentTime.getHours();
+        let minutes = currentTime.getMinutes();
+        let seconds = currentTime.getSeconds();
+        let meridiem = "AM";
+
+        // convert to 12-hour time format
+        if (hours > 12) {
+        hours = hours - 12;
+        meridiem = "PM";
+        }
+
+        // add leading zeros for minutes and seconds
+        if (minutes < 10) {
+        minutes = "0" + minutes;
+        }
+
+        if (seconds < 10) {
+        seconds = "0" + seconds;
+        }
+
+        let timeString = hours + ":" + minutes + ":" + seconds + " " + meridiem;
+*/
+
+        timestampElement.innerHTML = new Date().toLocaleString();
 
         const descriptionElement = document.createElement('div');
         descriptionElement.className = 'analysis';
