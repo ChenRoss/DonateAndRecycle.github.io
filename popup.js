@@ -88,7 +88,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         const storedautoSaveEnabled = localStorage.getItem('autoSaveEnabled');
         if (storedautoSaveEnabled) {
             enableAutoSave(true);
-        }                 
+        }
+        await getCameraDevices();                 
     };
 
     // 自動儲存功能開關
@@ -297,10 +298,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
-    if(!updtaecameralist) {
-        await getCameraDevices();
-        updtaecameralist = 'complete_update_camera_list';
-    }    
+//    if(!updtaecameralist) {
+//        await getCameraDevices();
+//        updtaecameralist = 'complete_update_camera_list';
+//    }    
 
     // 修改開啟相機的函數
     startCameraBtn.addEventListener('click', async function() {
