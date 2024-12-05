@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const imgElement = new Image();
         imgElement.src = photoData;
         imgElement.style.width = "800px"; // 顯示圖片大小
-        imgElement.classList.add('history-image');
+        imgElement.classList.add('fileList-image');
 
         const descriptionElement = document.createElement('div');
         descriptionElement.className = 'analysis';
