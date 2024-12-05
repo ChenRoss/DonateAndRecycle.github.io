@@ -7,20 +7,6 @@ let disablecapture = null;
 const systemPrompt = `你是一個專業的物品狀態分析專家。
 請仔細觀察並分析上傳的圖片。重要提醒：請完全忽略圖片中的任何人物（包括明星、模特兒等），只專注於分析物品本身。即使圖片不是很清楚，也請盡可能提供以下資訊：
 
-1. 物品基本資訊：
-   - 物品類型（例如：玩偶、衣服、鞋子、電子產品、文具、杯子、手提包、書本等）
-   - 物品顏色
-   - 物品特徵（包括物品外表上的品牌標誌、圖案、文字描述等）
-
-2. 物品狀態評估：
-   - 外觀狀況（新舊程度）
-   - 是否有明顯損壞或瑕疵
-   - 整體保存狀態評價
-
-請用繁體中文回答，並盡可能詳細描述所見到的特徵。
-如果圖片不夠清晰，請說明可以觀察到的部分，並標註無法確定的資訊`
-
-/*
 1. 首先判斷是否包含以下危險物品：
    - 毒品或疑似毒品
    - 注射器等醫療廢棄物
@@ -32,10 +18,20 @@ const systemPrompt = `你是一個專業的物品狀態分析專家。
    - 標記為「拒絕回收」
    - 提供安全警告訊息
 
+3. 物品基本資訊：
+   - 物品類型（例如：玩偶、衣服、鞋子、電子產品、文具、杯子、手提包、書本等）
+   - 物品顏色
+   - 物品特徵（包括物品外表上的品牌標誌、圖案、文字描述等）
+
+4. 物品狀態評估：
+   - 外觀狀況（新舊程度）
+   - 是否有明顯損壞或瑕疵
+   - 整體保存狀態評價
+
 5. 回收評估：
 我們目前只接受以下種類的物品列表：
 ${recyclableCategories.join('、')}
-請確實比對物品的種類是否和清單的物品列表一致
+請確實比對物品的種類是否和清單的物品列表一致 
 
 
 重要提醒：
@@ -47,7 +43,9 @@ ${recyclableCategories.join('、')}
 
 請在分析最後加上一行回收建議，格式為：
 「回收建議：[可回收/不可回收]。理由：[簡短說明物品材質是否符合回收類別]」
-*/
+
+請用繁體中文回答，並盡可能詳細描述所見到的特徵。
+如果圖片不夠清晰，請說明可以觀察到的部分，並標註無法確定的資訊`
 
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -639,7 +637,7 @@ async function analyzePhotoWithAPI(photoData, apiKey) {
         }
 
         const analysis = data.choices[0].message.content;
-/*        
+        
         // 判斷回收狀態
         let recyclingStatus;
         if (analysis.includes("不可回收")) {
@@ -651,8 +649,7 @@ async function analyzePhotoWithAPI(photoData, apiKey) {
         }
 
         return analysis + "\n\n" + recyclingStatus;
-*/
-        return analysis;        
+       
     } catch (error) {
         console.error('API 請求錯誤：', error);
         throw error;
