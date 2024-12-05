@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         const timestampElement = document.createElement('div');
         timestampElement.className = 'timestamp';
-        timestampElement.innerHTML = '【時間】${new Date().toLocaleString()}';
+        //timestampElement.innerHTML = '【時間】${new Date().toLocaleString()}';
 
         const descriptionElement = document.createElement('div');
         descriptionElement.className = 'analysis';
