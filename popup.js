@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         const imgElement = new Image();
         imgElement.src = photoData;
-        imgElement.width = 1280; // 顯示圖片大小
+        imgElement.width = 800; // 顯示圖片大小
 
         const descriptionElement = document.createElement('div');
         descriptionElement.className = 'analysis';
