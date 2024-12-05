@@ -158,7 +158,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         newHistoryItem.appendChild(infoElement);
         newHistoryItem.appendChild(imgElement);     
         
+        let dividingline = '<hr>'
         recentFilesDiv.appendChild(newHistoryItem);
+        recentFilesDiv.appendChild(dividingline);
 
         // 更新儲存
         await localStorage.setItem('recentFiles', recentFilesDiv.innerHTML);
