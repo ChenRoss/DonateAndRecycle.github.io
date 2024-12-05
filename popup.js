@@ -28,6 +28,10 @@ const systemPrompt = `你是一個專業的物品狀態分析專家。
    - 是否有明顯損壞或瑕疵
    - 整體保存狀態評價
 
+請用繁體中文回答，並盡可能詳細描述所見到的特徵。
+如果圖片不夠清晰，請說明可以觀察到的部分，並標註無法確定的資訊`
+
+/*
 5. 回收評估：
 我們目前只接受以下種類的物品列表：
 ${recyclableCategories.join('、')}
@@ -43,9 +47,8 @@ ${recyclableCategories.join('、')}
 
 請在分析最後加上一行回收建議，格式為：
 「回收建議：[可回收/不可回收]。理由：[簡短說明物品材質是否符合回收類別]」
+*/
 
-請用繁體中文回答，並盡可能詳細描述所見到的特徵。
-如果圖片不夠清晰，請說明可以觀察到的部分，並標註無法確定的資訊`
 
 document.addEventListener('DOMContentLoaded', async function() {
     const statusDiv = document.getElementById('status');
@@ -135,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         const imgElement = new Image();
         imgElement.src = photoData;
-        imgElement.style.width = "800px"; // 顯示圖片大小
+        imgElement.width = 800; // 顯示圖片大小
         imgElement.classList.add('fileList-image');
 
         const descriptionElement = document.createElement('div');
