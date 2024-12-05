@@ -155,8 +155,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         infoElement.appendChild(timestampElement);
         infoElement.appendChild(descriptionElement);
 
-        newHistoryItem.appendChild(imgElement);
-        newHistoryItem.appendChild(infoElement);     
+        newHistoryItem.appendChild(infoElement);
+        newHistoryItem.appendChild(imgElement);     
         
         recentFilesDiv.appendChild(newHistoryItem);
 
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // 如果啟用自動儲存，則自動匯出
         const storedautoSaveEnabled = localStorage.getItem('autoSaveEnabled');  
-             
+
         if (storedautoSaveEnabled) {
             await saveToFile(analysis, photoData);
         }
@@ -471,7 +471,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         statusDiv.className = 'status ' + className;
         statusDiv.textContent = message;
     }
-
+/*
     // 更新最近的照片列表
     function updateRecentFiles(files) {
         recentFilesDiv.innerHTML = '';
@@ -510,7 +510,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             recentFilesDiv.appendChild(div);
         });
     }
-
+*/
     // 停止相機
     function stopCamera() {
         if (stream) {
@@ -578,7 +578,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     clearHistoryBtn.addEventListener('click', function() {
         if (confirm('確定要清除所有歷史紀錄嗎？此操作無法復原。')) {
             localStorage.removeItem('recentFiles');
-            updateRecentFiles([]);
             updateStatus('歷史紀錄已清除', 'active');
             document.getElementById('analysisResult').style.display = 'none';
         }
