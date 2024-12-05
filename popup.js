@@ -134,7 +134,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         analysisResult.style.display = 'block';
 
         const newHistoryItem = document.createElement('div');
-        newHistoryItem.classList.add('file-item');
+        newHistoryItem.className = 'file-item';
+
+        const infoElement = document.createElement('div');
+        infoElement.className = 'info';
         
         const imgElement = new Image();
         imgElement.src = photoData;
@@ -142,43 +145,27 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         const timestampElement = document.createElement('div');
         timestampElement.className = 'timestamp';
-
-        //let currentTime = ;
-        //let timeString = '【時間】' + currentTime;
         let timeString = `【時間】${new Date().toLocaleString()}`;
-        timestampElement.innerHTML = timeString;
+        timestampElement.textContent = timeString;
 
         const descriptionElement = document.createElement('div');
         descriptionElement.className = 'analysis';
         descriptionElement.innerHTML = formatText(analysis);
 
-        newHistoryItem.appendChild(timestampElement);
-        newHistoryItem.appendChild(descriptionElement);
+        infoElement.appendChild(timestampElement);
+        infoElement.appendChild(descriptionElement);
+
         newHistoryItem.appendChild(imgElement);
+        newHistoryItem.appendChild(infoElement);     
         
         recentFilesDiv.appendChild(newHistoryItem);
 
-
-       
-        // 建立新記錄
-        //const newRecord = {
-        //    image: photoData,
-        //    analysis: analysis,
-        //    timestamp: new Date().toISOString()
-        //};
-
-        // 儲存到歷史記錄
-        //const storedrecentFiles     = localStorage.getItem('recentFiles');
-        const storedautoSaveEnabled = localStorage.getItem('autoSaveEnabled');
-
-        //const recentFiles = storedrecentFiles || [];
-        //const updatedFiles = [newRecord, ...recentFiles].slice(0, 10);
-
         // 更新儲存
         await localStorage.setItem('recentFiles', recentFilesDiv.innerHTML);
-        //updateRecentFiles(updatedFiles);
 
         // 如果啟用自動儲存，則自動匯出
+        const storedautoSaveEnabled = localStorage.getItem('autoSaveEnabled');  
+             
         if (storedautoSaveEnabled) {
             await saveToFile(analysis, photoData);
         }
