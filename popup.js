@@ -546,7 +546,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 <meta charset="UTF-8">
                 <style>
                     body { font-family: "Microsoft JhengHei", sans-serif; padding: 20px; }
-                    .photo { max-width: 800px; margin: 20px 0; }
+                    .img { max-width: 800px; margin: 20px 0; }
                     .timestamp { color: #666; }
                     .analysis { white-space: pre-wrap; }
                     hr { border: 1px solid #eee; margin: 30px 0; }
