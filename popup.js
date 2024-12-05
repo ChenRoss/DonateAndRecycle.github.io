@@ -581,7 +581,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             localStorage.removeItem('recentFiles');
             updateStatus('歷史紀錄已清除', 'active');
             document.getElementById('analysisResult').style.display = 'none';
-            recentFilesDiv.value = '';
+            
+            const storedrecentFiles = localStorage.getItem('recentFiles');
+            recentFilesDiv.innerHTML = storedrecentFiles;
         }
     });
 });
