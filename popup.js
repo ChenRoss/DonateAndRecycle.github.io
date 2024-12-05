@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // 載入設定
     // 在網頁加載時執行的程式
-    window.onload = function() {
+    window.onload = async function() {
         // 嘗試從 localStorage 中取得之前儲存的數值
         const storedApiKey = localStorage.getItem('apiKey');
         if (storedApiKey) {
