@@ -553,18 +553,11 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </style>
             </head>
             <body>
-
+                ${storedrecentFiles}
             </body>
             </html>
         `;
-/*
-                ${storedrecentFiles.map(record => `
-                    <div class="timestamp">【時間】${new Date(record.timestamp).toLocaleString()}</div>
-                    <div class="analysis">【分析結果】\n${record.analysis}</div>
-                    <img class="photo" src="${record.image}" alt="分析照片">
-                    <hr>
-                `).join('')}
-*/
+
         // 建立下載
         const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
 
