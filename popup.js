@@ -143,8 +143,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         const timestampElement = document.createElement('div');
         timestampElement.className = 'timestamp';
 
-        let currentTime = new Date().toLocaleString();
-        let timeString = '【時間】' + currentTime;
+        //let currentTime = ;
+        //let timeString = '【時間】' + currentTime;
+        let timeString = `【時間】${new Date().toLocaleString()}`;
         timestampElement.innerHTML = timeString;
 
         const descriptionElement = document.createElement('div');
