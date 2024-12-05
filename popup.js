@@ -142,12 +142,13 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         const timestampElement = document.createElement('div');
         timestampElement.className = 'timestamp';
-        timestampElement.innerHTML = formatText(analysis);
+        timestampElement.innerHTML = "【時間】" + ${new Date().toLocaleString()};
 
         const descriptionElement = document.createElement('div');
         descriptionElement.className = 'analysis';
-        descriptionElement.innerHTML = "【時間】" + ${new Date().toLocaleString()};//formatText(analysis);
+        descriptionElement.innerHTML = formatText(analysis);
 
+        newHistoryItem.appendChild(timestampElement);
         newHistoryItem.appendChild(descriptionElement);
         newHistoryItem.appendChild(imgElement);
         
