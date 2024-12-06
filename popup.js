@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         // 點擊顯示是否要清掉這項紀錄
         newHistoryItem.addEventListener('click', async function() {
             // 顯示確認視窗
-            let confirmmessage = '你確定要清除這項單筆紀錄嗎?' + '\n' + '(如果要清除全部記錄，請點選最上面的"清除歷史紀錄")';
+            let confirmmessage = '你確定要清除這項單筆紀錄嗎?' + '\n' + '如果要清除全部記錄，請點選最上面的"清除歷史紀錄"';
             var confirmClear = confirm(confirmmessage);
             if (confirmClear) {
                 // 清除紀錄
