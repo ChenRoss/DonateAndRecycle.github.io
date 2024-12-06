@@ -605,17 +605,14 @@ async function analyzePhotoWithAPI(photoData, apiKey) {
         // 判斷回收狀態
         let recyclingStatus;
         if (analysis.includes("不可回收")) {
-            recyclingStatus = "❌ 此物品不符合回收標準。";
+            recyclingStatus = "<span style='font-size: 24px;'>❌</span> 此物品不符合回收標準。";
         } else if (analysis.includes("無法分析") || analysis.includes("無法辨識")) {
-            recyclingStatus = "❌ 可能含有人物或著作商標，請重新拍攝。";
+            recyclingStatus = "<span style='font-size: 24px;'>❌</span> 可能含有人物或著作商標，請重新拍攝。";
         } else {
-            recyclingStatus = "✅ 此物品符合回收標準。";
+            recyclingStatus = "<span style='font-size: 24px;'>✅</span> 此物品符合回收標準。";
         }
 
-        let updatedrecyclingStatus = recyclingStatus.replace("❌", "<span style='font-size: 24px;'>❌</span>");
-        let updatedrecyclingStatus1 = updatedrecyclingStatus.replace("✅", "<span style='font-size: 24px;'>✅</span>");
-
-        return analysis + "\n\n" + updatedrecyclingStatus1;
+        return analysis + "\n\n" + recyclingStatus;
        
     } catch (error) {
         console.error('API 請求錯誤：', error);
