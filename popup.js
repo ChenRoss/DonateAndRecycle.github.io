@@ -605,11 +605,11 @@ async function analyzePhotoWithAPI(photoData, apiKey) {
         // 判斷回收狀態
         let recyclingStatus;
         if (analysis.includes("不可回收")) {
-            recyclingStatus = "<span style='font-size: 36px;'>❌</span> 此物品不符合回收標準。";
+            recyclingStatus = "<span style='font-size: 48px;'>❌</span><span style='font-size: 26px;'>此物品不符合回收標準。</span>";
         } else if (analysis.includes("無法分析") || analysis.includes("無法辨識")) {
-            recyclingStatus = "<span style='font-size: 36px;'>❌</span> 可能含有人物或著作商標，請重新拍攝。";
+            recyclingStatus = "<span style='font-size: 48px;'>❌</span><span style='font-size: 26px;'>可能含有人物或著作商標，請重新拍攝。</span>";
         } else {
-            recyclingStatus = "<span style='font-size: 36px;'>✅</span> 此物品符合回收標準。";
+            recyclingStatus = "<span style='font-size: 48px;'>✅</span><span style='font-size: 26px;'>此物品符合回收標準。</span>";
         }
 
         return analysis + "\n\n" + recyclingStatus;
