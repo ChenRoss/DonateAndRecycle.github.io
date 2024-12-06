@@ -92,11 +92,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             enableAutoSave(true);
         }
 
-        const selectedDeviceId = cameraSelect.value;
-        
         const constraints = {
             video: {
-                deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined,
                 width: { ideal: 1280 },
                 height: { ideal: 720 }
             },
