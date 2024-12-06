@@ -186,12 +186,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
-    recentFilesDiv.addEventListener('mouseenter', () => {
-      analysisImage.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
-    });
+    const images = document.querySelectorAll('.file-item img');
 
-    recentFilesDiv.addEventListener('mouseleave', () => {
-      analysisImage.style.transform = 'scale(1)'; // 還原
+    images.forEach(img => {
+        img.addEventListener('mouseenter', () => {
+          img.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
+        });
+
+        img.addEventListener('mouseleave', () => {
+          img.style.transform = 'scale(1)'; // 還原
+        });
     });    
 
     // 修改儲存檔案的函數
@@ -614,11 +618,11 @@ async function analyzePhotoWithAPI(photoData, apiKey) {
         // 判斷回收狀態
         let recyclingStatus;
         if (analysis.includes("不可回收")) {
-            recyclingStatus = "<span style='font-size: 48px;'>❌</span><span style='font-size: 26px;'>此物品不符合回收標準。</span>";
+            recyclingStatus = "<span style='font-size: 48px;'>❌</span><span style='font-size: 24px;'>此物品不符合回收標準。</span>";
         } else if (analysis.includes("無法分析") || analysis.includes("無法辨識")) {
-            recyclingStatus = "<span style='font-size: 48px;'>❌</span><span style='font-size: 26px;'>可能含有人物或著作商標，請重新拍攝。</span>";
+            recyclingStatus = "<span style='font-size: 48px;'>❌</span><span style='font-size: 24px;'>可能含有人物或著作商標，請重新拍攝。</span>";
         } else {
-            recyclingStatus = "<span style='font-size: 48px;'>✅</span><span style='font-size: 26px;'>此物品符合回收標準。</span>";
+            recyclingStatus = "<span style='font-size: 48px;'>✅</span><span style='font-size: 24px;'>此物品符合回收標準。</span>";
         }
 
         return analysis + "\n\n" + recyclingStatus;
