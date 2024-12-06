@@ -583,7 +583,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             document.getElementById('analysisResult').style.display = 'none';
             
             const storedrecentFiles = localStorage.getItem('recentFiles');
-            recentFilesDiv.innerHTML = storedrecentFiles;
+            recentFilesDiv.innerHTML = [];//storedrecentFiles;
         }
     });
 });
