@@ -197,13 +197,7 @@ document.addEventListener('DOMContentLoaded', async function() {
           analysisImage.style.transform = 'scale(1)'; // 還原
         });
     });*/    
-    analysisImage.addEventListener('mouseenter', () => {
-      analysisImage.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
-    });
 
-    analysisImage.addEventListener('mouseleave', () => {
-      analysisImage.style.transform = 'scale(1)'; // 還原
-    });
     // 修改儲存檔案的函數
     async function saveToFile(content, photoData) {
         try {
