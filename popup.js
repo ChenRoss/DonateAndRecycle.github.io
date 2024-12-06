@@ -182,8 +182,21 @@ document.addEventListener('DOMContentLoaded', async function() {
         newHistoryItem.appendChild(imgElement);
         
         const dividingline = document.createElement('hr');
+        newHistoryItem.appendChild(dividingline);
+
+        // 點擊顯示是否要清掉這項紀錄
+        newHistoryItem.addEventListener('click', function() {
+            // 顯示確認視窗
+            var confirmClear = confirm("你確定要清除這項紀錄嗎?");
+            if (confirmClear) {
+                // 清除紀錄
+                newHistoryItem.innerHTML = '';
+                // 更新儲存
+                await localStorage.setItem('recentFiles', recentFilesDiv.innerHTML);                
+            }
+        });
+
         recentFilesDiv.appendChild(newHistoryItem);
-        recentFilesDiv.appendChild(dividingline);
 
         // 更新儲存
         await localStorage.setItem('recentFiles', recentFilesDiv.innerHTML);
