@@ -187,11 +187,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     recentFilesDiv.addEventListener('mouseenter', () => {
-      //analysisImage.style.transform = 'scale(2)'; // 放大
+      analysisImage.style.transform = 'translateX(-50px) translateY(-50px) scale(3)'; // 放大
     });
 
     recentFilesDiv.addEventListener('mouseleave', () => {
-      //analysisImage.style.transform = 'scale(1)'; // 還原
+      analysisImage.style.transform = 'translateX(50px) translateY(50px) scale(1)'; // 還原
     });    
 
     // 修改儲存檔案的函數
