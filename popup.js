@@ -206,6 +206,13 @@ document.addEventListener('DOMContentLoaded', async function() {
                 //clearBtn.removeEventListener('click', async function()); 
             });
 
+            // 監聽彈出視窗的匯出按鈕
+            exportBtn.addEventListener("click", function() {
+                const storednewHistory = newHistoryItem.innerHTML || [];
+                exportHistoryandsave(storednewHistory)
+                closePopup();
+            });            
+
 /*            
             let confirmmessage = '你確定要清除這項單筆紀錄嗎?' + '\n' + '如果要清除全部記錄，請點選最上面的"清除歷史紀錄"';
             var confirmClear = confirm(confirmmessage);
@@ -237,6 +244,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         popup.style.display = "none";
         popupOverlay.style.display = "none";
     }
+
+    // 點擊 overlay 關閉彈出視窗
+    popupOverlay.addEventListener("click", closePopup);        
 
     // 修改儲存檔案的函數
     async function saveToFile(content, photoData) {
@@ -553,7 +563,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         const storedValue = localStorage.getItem('recentFiles');
         const storedrecentFiles = storedValue || [];
-        
+        exportHistoryandsave(storedrecentFiles);
+
+    });
+
+    function exportHistoryandsave(storedrecentFiles) {
         // 建立 HTML 內容
         const htmlContent = `
             <!DOCTYPE html>
@@ -589,7 +603,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         URL.revokeObjectURL(url);
         
         updateStatus('已匯出所有記錄', 'active');
-    });
+    }
 
     // 清除歷史紀錄
     clearHistoryBtn.addEventListener('click', function() {
