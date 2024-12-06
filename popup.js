@@ -189,12 +189,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     const images = document.querySelectorAll('.file-item img');
 
     images.forEach(img => {
-        img.addEventListener('mouseenter', () => {
-          img.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
+        analysisImage.addEventListener('mouseenter', () => {
+          analysisImage.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
         });
 
-        img.addEventListener('mouseleave', () => {
-          img.style.transform = 'scale(1)'; // 還原
+        analysisImage.addEventListener('mouseleave', () => {
+          analysisImage.style.transform = 'scale(1)'; // 還原
         });
     });    
 
