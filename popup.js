@@ -152,16 +152,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         infoElement.className = 'info';
         
         const imgElement = new Image();
-        imgElement.id = "analysisImage";
+        //imgElement.className = "analysisImage";
         imgElement.src = photoData;
         imgElement.width = 800; // 顯示圖片大小
-        const imgElementdiv = document.getElementsById(analysisImage);
-        imgElementdiv.addEventListener('mouseenter', () => {
-          imgElementdiv.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
+        //const imgElementdiv = document.getElementsById('analysisImage');
+        imgElement.addEventListener('mouseenter', () => {
+          imgElement.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
         });
 
-        imgElementdiv.addEventListener('mouseleave', () => {
-          imgElementdiv.style.transform = 'scale(1)'; // 還原
+        imgElement.addEventListener('mouseleave', () => {
+          imgElement.style.transform = 'scale(1)'; // 還原
         });
 
         const timestampElement = document.createElement('div');
