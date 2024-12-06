@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         infoElement.className = 'info';
         
         const imgElement = new Image();
-        imgElement.id = "analysisImage";
+        imgElement.className = "analysisImage";
         imgElement.src = photoData;
         imgElement.width = 800; // 顯示圖片大小
 
@@ -186,10 +186,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
-    const analysisresultimages = document.querySelectorAll('[id^="analysisImage"]');
+    const analysisresultimages = document.querySelectorAll('.analysisImage');
 
     analysisresultimages.forEach(image => {        
-        const imagediv = document.getElementById(image);
+        const imagediv = document.getElementsByClassName(image);
         imagediv.addEventListener('mouseenter', () => {
           imagediv.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
         });
