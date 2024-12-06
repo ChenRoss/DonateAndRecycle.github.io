@@ -186,18 +186,24 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
-    const analysisimages = document.querySelectorAll("[id^='analysisImage']");
+    /*const analysisresultimages = document.querySelectorAll("[id^='analysisImage']");
 
-    analysisimages.forEach(image => {
+    analysisresultimages.forEach(image => {
         image.addEventListener('mouseenter', () => {
-          image.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
+          analysisImage.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
         });
 
         image.addEventListener('mouseleave', () => {
-          image.style.transform = 'scale(1)'; // 還原
+          analysisImage.style.transform = 'scale(1)'; // 還原
         });
-    });    
+    });*/    
+    analysisImage.addEventListener('mouseenter', () => {
+      analysisImage.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
+    });
 
+    analysisImage.addEventListener('mouseleave', () => {
+      analysisImage.style.transform = 'scale(1)'; // 還原
+    });
     // 修改儲存檔案的函數
     async function saveToFile(content, photoData) {
         try {
