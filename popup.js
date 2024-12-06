@@ -158,10 +158,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         //const imgElementdiv = document.getElementsById('analysisImage');
         imgElement.addEventListener('mouseenter', () => {
           imgElement.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
+          imgElement.style.zIndex = 10; // 設置圖片位於最上層
         });
 
         imgElement.addEventListener('mouseleave', () => {
           imgElement.style.transform = 'scale(1)'; // 還原
+          imgElement.style.zIndex = 1; // 還原
         });
 
         const timestampElement = document.createElement('div');
