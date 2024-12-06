@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
-    const analysisresultimages = document.querySelectorAll('[id^='analysisImage']');
+    const analysisresultimages = document.querySelectorAll('[id^="analysisImage"]');
 
     analysisresultimages.forEach(image => {        
         const imagediv = document.getElementById(image);
