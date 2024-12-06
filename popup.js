@@ -87,6 +87,18 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (storedautoSaveEnabled) {
             enableAutoSave(true);
         }
+
+        const selectedDeviceId = cameraSelect.value;
+        
+        const constraints = {
+            video: {
+                deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined,
+                width: { ideal: 1280 },
+                height: { ideal: 720 }
+            },
+            audio: false
+        };        
+        await navigator.mediaDevices.getUserMedia(constraints);
         await getCameraDevices();                 
     };
 
@@ -304,14 +316,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 修改開啟相機的函數
     startCameraBtn.addEventListener('click', async function() {
         try {
-            /*if (stream) {
-                stopCamera();
-                return;
-            }*/
-
-            // 使用 activeTab 權限請求相機
-            //await chrome.tabs.query({active: true, currentWindow: true});
-            
+         
             // 取得選擇的攝影機 ID
             const selectedDeviceId = cameraSelect.value;
             
@@ -472,46 +477,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         statusDiv.className = 'status ' + className;
         statusDiv.textContent = message;
     }
-/*
-    // 更新最近的照片列表
-    function updateRecentFiles(files) {
-        recentFilesDiv.innerHTML = '';
-        files.forEach(file => {
-            const div = document.createElement('div');
-            div.className = 'file-item';
-            
-            const img = document.createElement('img');
-            img.src = file.image;
-            
-            const info = document.createElement('div');
-            info.className = 'info';
-            
-            const timestamp = document.createElement('div');
-            timestamp.className = 'timestamp';
-            timestamp.textContent = new Date(file.timestamp).toLocaleString();
-            
-            const analysis = document.createElement('div');
-            analysis.className = 'analysis';
-            analysis.innerHTML = formatText(file.analysis);
-            
-            info.appendChild(timestamp);
-            info.appendChild(analysis);
-            
-            div.appendChild(img);
-            div.appendChild(info);
-            
-            // 點擊顯示分結果
-            div.addEventListener('click', function() {
-                const analysisResult = document.getElementById('analysisResult');
-                analysisResult.innerHTML = formatText(file.analysis);
-                analysisResult.style.display = 'block';
-                updateStatus('顯示歷史分析結果', 'active');
-            });
-            
-            recentFilesDiv.appendChild(div);
-        });
-    }
-*/
+
     // 停止相機
     function stopCamera() {
         if (stream) {
@@ -581,9 +547,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             localStorage.removeItem('recentFiles');
             updateStatus('歷史紀錄已清除', 'active');
             document.getElementById('analysisResult').style.display = 'none';
-            
-            const storedrecentFiles = localStorage.getItem('recentFiles');
-            recentFilesDiv.innerHTML = [];//storedrecentFiles;
+            recentFilesDiv.innerHTML = [];
         }
     });
 });
