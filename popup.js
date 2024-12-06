@@ -66,6 +66,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     const autoSaveToggleBtn = document.getElementById('autoSaveToggle');
     const autoSaveStatus = document.getElementById('autoSaveStatus');
 
+    const popup = document.getElementById("popup");
+    const popupOverlay = document.getElementById("popupOverlay");
+    const exportBtn = document.getElementById("exportBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
     // 載入設定
     // 在網頁加載時執行的程式
     window.onload = async function() {
@@ -185,8 +190,23 @@ document.addEventListener('DOMContentLoaded', async function() {
         newHistoryItem.appendChild(dividingline);
 
         // 點擊顯示是否要清掉這項紀錄
-        newHistoryItem.addEventListener('click', async function() {
+        newHistoryItem.addEventListener('click', async function() {        
             // 顯示確認視窗
+
+            popup.style.display = "block";
+            popupOverlay.style.display = "block";
+
+            // 監聽彈出視窗的清除按鈕
+            clearBtn.addEventListener("click",async function() {
+                // 清除紀錄
+                newHistoryItem.innerHTML = '';
+                // 清除儲存裡的那項紀錄
+                await localStorage.setItem('recentFiles', recentFilesDiv.innerHTML);
+                closePopup();
+                //clearBtn.removeEventListener('click', async function()); 
+            });
+
+/*            
             let confirmmessage = '你確定要清除這項單筆紀錄嗎?' + '\n' + '如果要清除全部記錄，請點選最上面的"清除歷史紀錄"';
             var confirmClear = confirm(confirmmessage);
             if (confirmClear) {
@@ -195,6 +215,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 // 清除儲存裡的那項紀錄
                 await localStorage.setItem('recentFiles', recentFilesDiv.innerHTML);                
             }
+*/
+
         });
 
         recentFilesDiv.appendChild(newHistoryItem);
@@ -208,6 +230,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (storedautoSaveEnabled) {
             await saveToFile(analysis, photoData);
         }
+    }
+
+    // 關閉彈出視窗
+    function closePopup() {
+        popup.style.display = "none";
+        popupOverlay.style.display = "none";
     }
 
     // 修改儲存檔案的函數
