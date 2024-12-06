@@ -612,7 +612,10 @@ async function analyzePhotoWithAPI(photoData, apiKey) {
             recyclingStatus = "✅ 此物品符合回收標準。";
         }
 
-        return analysis + "\n\n" + recyclingStatus;
+        let updatedrecyclingStatus = recyclingStatus.replace("❌", "<span style='font-size: 24px;'>❌</span>");
+        let updatedrecyclingStatus1 = updatedrecyclingStatus.replace("✅", "<span style='font-size: 24px;'>✅</span>");
+
+        return analysis + "\n\n" + updatedrecyclingStatus1;
        
     } catch (error) {
         console.error('API 請求錯誤：', error);
