@@ -554,7 +554,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         const link = document.createElement('a');        
         link.href = url;
-        link.download = '相機照片分析器_匯出記錄_${timestamp}.html';
+        link.download = `相機照片分析器_匯出記錄_${timestamp}.html`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
