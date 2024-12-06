@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
 
         if (!storedApiKey || !storedAutoSavePath) {
-            updateStatus('歡迎使用相機照片分析器！請先設定您的 OpenAI API Key 和儲存資料夾', 'active');    
+            updateStatus('歡迎使用相機照片分析器！請先設定您的 OpenAI API Key 和資料夾名稱', 'active');    
         }
 
         const storedrecentFiles = localStorage.getItem('recentFiles');
