@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         infoElement.className = 'info';
         
         const imgElement = new Image();
-        imgElement.className = "analysisImage";
+        imgElement.id = "analysisImage";
         imgElement.src = photoData;
         imgElement.width = 800; // 顯示圖片大小
 
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     const analysisresultimages = document.querySelectorAll('.analysisImage');
 
-    analysisresultimages.forEach(image => {
+    /*analysisresultimages.forEach(image => {
         image.addEventListener('mouseenter', () => {
           image.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
         });
@@ -196,14 +196,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         image.addEventListener('mouseleave', () => {
           image.style.transform = 'scale(1)'; // 還原
         });
-    });    
-    /*recentFilesDiv.addEventListener('mouseenter', () => {
+    });*/    
+    recentFilesDiv.addEventListener('mouseenter', () => {
       analysisImage.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
     });
 
     recentFilesDiv.addEventListener('mouseleave', () => {
       analysisImage.style.transform = 'scale(1)'; // 還原
-    });*/
+    });
     // 修改儲存檔案的函數
     async function saveToFile(content, photoData) {
         try {
