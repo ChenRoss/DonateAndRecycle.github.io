@@ -186,15 +186,15 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
-    const images = document.querySelectorAll('.file-item img');
+    const analysisimages = document.querySelectorAll("[id^='analysisImage']");
 
-    images.forEach(img => {
-        analysisImage.addEventListener('mouseenter', () => {
-          analysisImage.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
+    analysisimages.forEach(image => {
+        image.addEventListener('mouseenter', () => {
+          image.style.transform = 'translateX(-100px) translateY(100px) scale(5)'; // 放大
         });
 
-        analysisImage.addEventListener('mouseleave', () => {
-          analysisImage.style.transform = 'scale(1)'; // 還原
+        image.addEventListener('mouseleave', () => {
+          image.style.transform = 'scale(1)'; // 還原
         });
     });    
 
