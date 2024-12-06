@@ -78,9 +78,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (storedAutoSavePath) {
             autoSavePathInput.value = storedAutoSavePath;
         }
+
+        if (!storedApiKey || !storedAutoSavePath) {
+            updateStatus('歡迎使用相機照片分析器！請先設定您的 OpenAI API Key 和儲存資料夾', 'active');    
+        }
+
         const storedrecentFiles = localStorage.getItem('recentFiles');
         if (storedrecentFiles) {
-            //updateRecentFiles(storedrecentFiles);
             recentFilesDiv.innerHTML = storedrecentFiles;
         }
         const storedautoSaveEnabled = localStorage.getItem('autoSaveEnabled');
@@ -277,7 +281,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     cameraSelect.id = 'cameraSelect';
     cameraSelect.className = 'camera-select';
     // 將選單插入到相機按鈕前面
-    //startCameraBtn.parentNode.insertBefore(cameraSelect, startCameraBtn);
     noelement.parentNode.insertBefore(cameraSelect, noelement);
 
     // 取得可用的攝影機列表
@@ -362,7 +365,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             stopCamera();
             return;
         }
-    });        
+    });
+
     // 拍攝照片
     capturePhotoBtn.addEventListener('click', async function() {
         if (!stream) {
@@ -372,9 +376,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         if (disablecapture) {
         	disablecapture = null;
-
-            // 使用 activeTab 權限請求相機
-            //await chrome.tabs.query({active: true, currentWindow: true});
             
             // 取得選擇的攝影機 ID
             const selectedDeviceId = cameraSelect.value;
@@ -487,7 +488,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             cameraVideo.style.display = 'none';
             previewImg.srcObject = null;
             previewImg.style.display = 'none';
-            //startCameraBtn.textContent = '開啟相機';
             capturePhotoBtn.textContent = '拍攝照片';
             startCameraBtn.disabled = false;
             capturePhotoBtn.disabled = true;
