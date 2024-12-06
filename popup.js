@@ -152,6 +152,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         infoElement.className = 'info';
         
         const imgElement = new Image();
+        imgElement.id = "analysisImage";
         imgElement.src = photoData;
         imgElement.width = 800; // 顯示圖片大小
 
@@ -184,6 +185,14 @@ document.addEventListener('DOMContentLoaded', async function() {
             await saveToFile(analysis, photoData);
         }
     }
+
+    recentFilesDiv.addEventListener('mouseenter', () => {
+      analysisImage.style.transform = 'scale(2)'; // 放大
+    });
+
+    recentFilesDiv.addEventListener('mouseleave', () => {
+      analysisImage.style.transform = 'scale(1)'; // 還原
+    });    
 
     // 修改儲存檔案的函數
     async function saveToFile(content, photoData) {
