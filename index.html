@@ -57,6 +57,12 @@
       font-size: 18px;
     }
 
+    /* 按下時，模擬凹陷效果 */
+    button:active {
+      box-shadow: 0 2px #666; /* 改變陰影，讓按鈕看起來被按下 */
+      transform: translateY(3px); /* 按下去的感覺，讓按鈕向下移動 */
+    }    
+
     button:disabled {
       background-color: #ccc;
       cursor: not-allowed;
